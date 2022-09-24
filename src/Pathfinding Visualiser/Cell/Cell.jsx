@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-import './Cell.css';
+import "./Cell.css";
 export default class Cell extends Component {
     constructor(props) {
         super(props);
@@ -8,6 +8,6 @@ export default class Cell extends Component {
     }
 
     render() {
-        return <div className='cell'></div>
+        return <div className='cell'></div>;
     }
-};
+}

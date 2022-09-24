@@ -1,5 +1,5 @@
 .grid {
-    position: absolute;
-    margin: 0 auto;
-    display: inline-block;
+    display: block;
+    margin: 300px auto auto;
+    width: fit-content;
 }
