@@ -4,3 +4,11 @@
     outline: 1px solid black;
     display: inline-block;
 }
+
+.cell-start {
+    background-color: green;
+}
+
+.cell-finish {
+    background-color: red;
+}

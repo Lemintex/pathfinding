@@ -12,40 +12,55 @@ export default class PathfindingVisualiser extends Component {
     }
 
     componentDidMount() {
+        this.initialiseGrid();
+    }
+
+    render() {
+        let { grid } = this.state;
+
+        return (
+            <>
+                <div className='grid'>
+                    {grid.map((row, rowIdx) => {
+                        return (
+                            <div key={rowIdx}>
+                                {row.map((node, nodeIdx) => {
+                                    let { row, col, isFinish, isStart } = node;
+                                    return (
+                                        <Cell
+                                            key={nodeIdx}
+                                            row={row}
+                                            col={col}
+                                            isStart={isStart}
+                                            isFinish={isFinish}
+                                        ></Cell>
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            </>
+        );
+    }
+
+    initialiseGrid() {
+        let grid = [];
         let rows = 20;
         let cols = 40;
-        let grid = [];
-        for (let i = 1; i <= rows; i++) {
+        for (let i = 0; i < rows; i++) {
             var currentRow = [];
-            for (let j = 1; j <= cols; j++) {
+            for (let j = 0; j < cols; j++) {
                 let cellInfo = {
                     row: i,
                     col: j,
-                    isStart: j === 1,
-                    isFinish: j === cols,
+                    isStart: j === 3,
+                    isFinish: j === cols - 4,
                 };
                 currentRow.push(cellInfo);
             }
             grid.push(currentRow);
         }
         this.setState({ grid });
-    }
-
-    render() {
-        let { grid } = this.state;
-        console.log(grid);
-        return (
-            <div className='grid'>
-                {grid.map((rows, rowID) => {
-                    return (
-                        <div>
-                            {rows.map((cell, cellID) => (
-                                <Cell key={cellID}></Cell>
-                            ))}
-                        </div>
-                    );
-                })}
-            </div>
-        );
     }
 }

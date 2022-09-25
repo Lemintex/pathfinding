@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 import "./Cell.css";
 export default class Cell extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
     render() {
-        return <div className='cell'></div>;
+        let { row, col, isStart, isFinish } = this.props;
+        let classInfo = "";
+        if (isStart) classInfo = "cell-start";
+        else if (isFinish) classInfo = "cell-finish";
+        else classInfo = "cell";
+        return <div className={`cell ${classInfo}`}></div>;
     }
 }
