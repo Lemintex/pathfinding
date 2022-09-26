@@ -8,6 +8,8 @@ export default class PathfindingVisualiser extends Component {
         super(props);
         this.state = {
             grid: [],
+            mousePressed: false,
+            selectedCellIndex: [],
         };
     }
 
@@ -16,7 +18,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     render() {
-        let { grid } = this.state;
+        let grid = this.state.grid;
 
         return (
             <>
@@ -25,7 +27,13 @@ export default class PathfindingVisualiser extends Component {
                         return (
                             <div key={rowIdx}>
                                 {row.map((node, nodeIdx) => {
-                                    let { row, col, isFinish, isStart } = node;
+                                    let {
+                                        row,
+                                        col,
+                                        isFinish,
+                                        isStart,
+                                        isWall,
+                                    } = node;
                                     return (
                                         <Cell
                                             key={nodeIdx}
@@ -33,6 +41,16 @@ export default class PathfindingVisualiser extends Component {
                                             col={col}
                                             isStart={isStart}
                                             isFinish={isFinish}
+                                            isWall={isWall}
+                                            onMouseDown={() =>
+                                                this.handleMouseDown()
+                                            }
+                                            onMouseEnter={() =>
+                                                this.handleMouseEnter(row, col)
+                                            }
+                                            onMouseUp={() =>
+                                                this.handleMouseUp()
+                                            }
                                         ></Cell>
                                     );
                                 })}
@@ -42,6 +60,27 @@ export default class PathfindingVisualiser extends Component {
                 </div>
             </>
         );
+    }
+
+    handleMouseDown() {
+        this.setState({ mousePressed: true });
+        let index = this.state.selectedCellIndex;
+        let newGrid = this.state.grid;
+        newGrid[index[0]][index[1]].isWall = true;
+        this.setState({ grid: newGrid });
+    }
+
+    handleMouseEnter(row, col) {
+        // console.log(row);
+        this.setState({ selectedCellIndex: [row, col] });
+        if (!this.state.mousePressed) return;
+        let newGrid = this.state.grid;
+        newGrid[row][col].isWall = true;
+        this.setState({ grid: newGrid });
+    }
+
+    handleMouseUp() {
+        this.setState({ mousePressed: false });
     }
 
     initialiseGrid() {
@@ -56,6 +95,7 @@ export default class PathfindingVisualiser extends Component {
                     col: j,
                     isStart: j === 3,
                     isFinish: j === cols - 4,
+                    isWall: false,
                 };
                 currentRow.push(cellInfo);
             }
