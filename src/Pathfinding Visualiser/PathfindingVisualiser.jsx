@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import Cell from "./Cell/Cell";
 
+import {
+    beginDepthFirstSearch,
+    beginSearch,
+} from "../Pathfinding Algorithms/DepthFirstSearch";
+
 import "./PathfindingVisualiser.css";
+
+const START_CELL_ROW = 5;
+const START_CELL_COL = 5;
+const FINISH_CELL_ROW = 5;
+const FINISH_CELL_COL = 15;
 
 export default class PathfindingVisualiser extends Component {
     constructor(props) {
@@ -22,6 +32,9 @@ export default class PathfindingVisualiser extends Component {
 
         return (
             <>
+                <button onClick={() => this.visualiseDepthFirst()}>
+                    Visualise
+                </button>
                 <div className='grid'>
                     {grid.map((row, rowIdx) => {
                         return (
@@ -93,14 +106,21 @@ export default class PathfindingVisualiser extends Component {
                 let cellInfo = {
                     row: i,
                     col: j,
-                    isStart: j === 3,
-                    isFinish: j === cols - 4,
+                    isStart: i === START_CELL_ROW && j === START_CELL_COL,
+                    isFinish: i === FINISH_CELL_ROW && j === FINISH_CELL_COL,
                     isWall: false,
+                    isVisited: false,
                 };
                 currentRow.push(cellInfo);
             }
             grid.push(currentRow);
         }
         this.setState({ grid });
+    }
+
+    visualiseDepthFirst() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        beginDepthFirstSearch(grid, start);
     }
 }

@@ -9,6 +9,7 @@ export default class Cell extends Component {
             isStart,
             isFinish,
             isWall,
+            isVisited,
             onMouseDown,
             onMouseEnter,
             onMouseUp,
