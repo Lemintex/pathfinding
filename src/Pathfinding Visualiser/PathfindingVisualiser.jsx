@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import Cell from "./Cell/Cell";
 
-import {
-    beginDepthFirstSearch,
-    beginSearch,
-} from "../Pathfinding Algorithms/DepthFirstSearch";
+import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearch";
 
 import "./PathfindingVisualiser.css";
 
 const START_CELL_ROW = 5;
 const START_CELL_COL = 5;
-const FINISH_CELL_ROW = 5;
-const FINISH_CELL_COL = 15;
+const FINISH_CELL_ROW = 15;
+const FINISH_CELL_COL = 35;
 
 export default class PathfindingVisualiser extends Component {
     constructor(props) {
@@ -121,6 +118,15 @@ export default class PathfindingVisualiser extends Component {
     visualiseDepthFirst() {
         let { grid } = this.state;
         let start = grid[START_CELL_ROW][START_CELL_COL];
-        beginDepthFirstSearch(grid, start);
+        let visitedNodesInOrder = beginDepthFirstSearch(grid, start);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, 100 * i);
+        }
     }
 }

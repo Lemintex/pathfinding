@@ -14,5 +14,9 @@
 }
 
 .cell-wall {
+    background-color: black;
+}
+
+.cell-visited {
     background-color: blue;
 }
