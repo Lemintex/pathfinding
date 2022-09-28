@@ -31,6 +31,6 @@ export function beginDepthFirstSearch(grid, startNode) {
 }
 
 function visitNode(node, stack) {
-    if (node.isVisited) return;
+    if (node.isVisited || node.isWall) return;
     stack.push(node);
 }

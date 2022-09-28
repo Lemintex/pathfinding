@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Cell from "./Cell/Cell";
 
 import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearch";
+import { beginBreadthFirstSearch } from "../Pathfinding Algorithms/BreadthFirstSearch";
 
 import "./PathfindingVisualiser.css";
 
@@ -30,9 +31,12 @@ export default class PathfindingVisualiser extends Component {
         return (
             <>
                 <button onClick={() => this.visualiseDepthFirst()}>
-                    Visualise
+                    Visualise DFS
                 </button>
-                <div className='grid'>
+                <button onClick={() => this.visualiseBreadthFirst()}>
+                    Visualise BFS
+                </button>
+                <div>
                     {grid.map((row, rowIdx) => {
                         return (
                             <div key={rowIdx}>
@@ -121,6 +125,23 @@ export default class PathfindingVisualiser extends Component {
         let visitedNodesInOrder = beginDepthFirstSearch(grid, start);
         for (let i = 0; i < visitedNodesInOrder.length; i++) {
             let node = visitedNodesInOrder[i];
+            if (node.isStart || node.isFinish) continue;
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, 100 * i);
+        }
+    }
+
+    visualiseBreadthFirst() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        let visitedNodesInOrder = beginBreadthFirstSearch(grid, start);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            if (node.isStart || node.isFinish) continue;
             setTimeout(() => {
                 document.getElementById(
                     `cell-${node.row}-${node.col}`
