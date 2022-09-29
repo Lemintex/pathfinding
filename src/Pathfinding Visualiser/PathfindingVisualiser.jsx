@@ -3,9 +3,12 @@ import Cell from "./Cell/Cell";
 
 import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearch";
 import { beginBreadthFirstSearch } from "../Pathfinding Algorithms/BreadthFirstSearch";
+import { generateRecursionMaze } from "../Maze Generating Algorithm/RecursiveGeneration";
 
 import "./PathfindingVisualiser.css";
 
+const GRID_LENGTH = 39;
+const GRID_HEIGHT = 25;
 const START_CELL_ROW = 5;
 const START_CELL_COL = 5;
 const FINISH_CELL_ROW = 15;
@@ -35,6 +38,9 @@ export default class PathfindingVisualiser extends Component {
                 </button>
                 <button onClick={() => this.visualiseBreadthFirst()}>
                     Visualise BFS
+                </button>
+                <button onClick={() => this.generateRecursiveMaze()}>
+                    Generate Recursive Maze
                 </button>
                 <div>
                     {grid.map((row, rowIdx) => {
@@ -99,11 +105,9 @@ export default class PathfindingVisualiser extends Component {
 
     initialiseGrid() {
         let grid = [];
-        let rows = 20;
-        let cols = 40;
-        for (let i = 0; i < rows; i++) {
+        for (let i = 0; i < GRID_HEIGHT; i++) {
             var currentRow = [];
-            for (let j = 0; j < cols; j++) {
+            for (let j = 0; j < GRID_LENGTH; j++) {
                 let cellInfo = {
                     row: i,
                     col: j,
@@ -146,6 +150,24 @@ export default class PathfindingVisualiser extends Component {
                 document.getElementById(
                     `cell-${node.row}-${node.col}`
                 ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, 100 * i);
+        }
+    }
+
+    generateRecursiveMaze() {
+        let { grid } = this.state;
+        let listOfGeneratedWallsInOrder = generateRecursionMaze(grid);
+        for (let i = 0; i < listOfGeneratedWallsInOrder.length; i++) {
+            let wallSegment = listOfGeneratedWallsInOrder[i];
+            setTimeout(() => {
+                for (let j = 0; j < wallSegment.length; j++) {
+                    let node = wallSegment[j];
+                    if (node.isStart || node.isFinish) continue;
+                    document.getElementById(
+                        `cell-${node.row}-${node.col}`
+                    ).className = "cell cell-wall";
+                }
                 this.setState({ grid });
             }, 100 * i);
         }

@@ -17,7 +17,7 @@ export default class Cell extends Component {
         let classInfo = "";
         if (isStart) classInfo = "cell-start";
         else if (isFinish) classInfo = "cell-finish";
-        else if (isWall) classInfo = "cell-wall";
+        // else if (isWall) classInfo = "cell-wall";
         // else if (isVisited) {
         //     console.log("VISITED");
         //     classInfo = "cell-visited";
