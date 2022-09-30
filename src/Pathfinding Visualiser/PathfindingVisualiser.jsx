@@ -164,12 +164,14 @@ export default class PathfindingVisualiser extends Component {
                 for (let j = 0; j < wallSegment.length; j++) {
                     let node = wallSegment[j];
                     if (node.isStart || node.isFinish) continue;
+                    node.isWall = true;
+
                     document.getElementById(
                         `cell-${node.row}-${node.col}`
                     ).className = "cell cell-wall";
                 }
                 this.setState({ grid });
-            }, 100 * i);
+            }, 50 * i);
         }
     }
 }
