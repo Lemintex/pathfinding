@@ -13,7 +13,7 @@ const START_CELL_ROW = 5;
 const START_CELL_COL = 5;
 const FINISH_CELL_ROW = 15;
 const FINISH_CELL_COL = 35;
-
+let ANIMATION_SPEED = 20;
 export default class PathfindingVisualiser extends Component {
     constructor(props) {
         super(props);
@@ -135,7 +135,7 @@ export default class PathfindingVisualiser extends Component {
                     `cell-${node.row}-${node.col}`
                 ).className = "cell cell-visited";
                 this.setState({ grid });
-            }, 100 * i);
+            }, ANIMATION_SPEED * i);
         }
     }
 
@@ -151,7 +151,7 @@ export default class PathfindingVisualiser extends Component {
                     `cell-${node.row}-${node.col}`
                 ).className = "cell cell-visited";
                 this.setState({ grid });
-            }, 100 * i);
+            }, ANIMATION_SPEED * i);
         }
     }
 
@@ -171,7 +171,7 @@ export default class PathfindingVisualiser extends Component {
                     ).className = "cell cell-wall";
                 }
                 this.setState({ grid });
-            }, 50 * i);
+            }, ANIMATION_SPEED * i);
         }
     }
 }

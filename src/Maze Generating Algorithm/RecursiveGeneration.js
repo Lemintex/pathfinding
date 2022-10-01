@@ -8,7 +8,7 @@ export function generateRecursionMaze(g) {
     let maxX = grid[0].length - 2,
         maxY = grid.length - 2;
     divideChamber(true, minX, maxX, minY, maxY);
-    // createBounds();
+    createBounds();
     console.log(listsOfNodesToMakeWalls);
     return listsOfNodesToMakeWalls;
 }
@@ -42,7 +42,7 @@ function divideChamber(horizontal, minX, maxX, minY, maxY) {
         let y;
         do {
             y = Math.floor(randomNumber(minY, maxY) / 2) * 2;
-        } while (y <= 0 || y >= grid.length - 1);
+        } while (y <= minY || y >= maxY);
 
         addHorizontalWall(minX, maxX, y);
 
@@ -56,7 +56,7 @@ function divideChamber(horizontal, minX, maxX, minY, maxY) {
         let x;
         do {
             x = Math.floor(randomNumber(minX, maxX) / 2) * 2;
-        } while (x <= 0 || x >= grid[0].length);
+        } while (x <= minX || x >= maxX);
         addVerticalWall(minY, maxY, x);
 
         divideChamber(!horizontal, minX, x - 1, minY, maxY);
@@ -73,7 +73,7 @@ function addHorizontalWall(min, max, y) {
     let hole = Math.floor(randomNumber(min, max) / 2) * 2 + 1;
     for (let i = min; i <= max; i++) {
         if (hole === i || grid[y][i].isDoorway) {
-            grid[y][i].isDoorway = true;
+            // grid[y][i].isDoorway = true;
             continue;
         }
 
@@ -85,10 +85,10 @@ function addHorizontalWall(min, max, y) {
 
 function addVerticalWall(min, max, x) {
     let walls = [];
-    let hole = Math.floor(randomNumber(min, max) / 2) * 2 + 1;
+    let hole = Math.floor(randomNumber(min + 1, max - 1) / 2) * 2 + 1;
     for (let i = min; i <= max; i++) {
         if (hole === i || grid[i][x].isDoorway) {
-            grid[i][x].isDoorway = true;
+            // grid[i][x].isDoorway = true;
             continue;
         }
 
