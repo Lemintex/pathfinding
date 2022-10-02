@@ -14,6 +14,7 @@ const START_CELL_COL = 5;
 const FINISH_CELL_ROW = 15;
 const FINISH_CELL_COL = 35;
 let ANIMATION_SPEED = 20;
+
 export default class PathfindingVisualiser extends Component {
     constructor(props) {
         super(props);
