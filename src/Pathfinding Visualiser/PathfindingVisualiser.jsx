@@ -116,6 +116,7 @@ export default class PathfindingVisualiser extends Component {
                     isFinish: i === FINISH_CELL_ROW && j === FINISH_CELL_COL,
                     isWall: false,
                     isVisited: false,
+                    distance: Infinity,
                 };
                 currentRow.push(cellInfo);
             }
