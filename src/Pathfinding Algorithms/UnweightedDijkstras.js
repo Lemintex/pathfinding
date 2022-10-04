@@ -1,15 +1,22 @@
 let nodesToBeVisited = [];
 let visitedNodesInOrder = [];
-
-export function dijkstras(grid, startNode, finishNode) {
-    nodesToBeVisited = getAllNodesFromGrid(grid);
+let grid;
+// worth noting this is essentially BFS as all nodes are weighted equally
+export function unweightedDijkstras(g, startNode) {
+    grid = g;
+    nodesToBeVisited = getAllNodesFromGrid();
     startNode.distance = 0;
+    console.log(nodesToBeVisited);
     while (nodesToBeVisited.length > 0) {
         updateHeap();
         let nextNode = nodesToBeVisited.shift();
         if (nextNode.isWall) continue;
-        updateNeighboursOfNode(node);
+        visitedNodesInOrder.push(nextNode);
+        if (nextNode.isFinish) return visitedNodesInOrder;
+        updateNeighboursOfNode(nextNode);
     }
+    // if every node is visited and the finish node isn't found, give up
+    return visitedNodesInOrder;
 }
 
 function updateHeap() {
@@ -33,7 +40,7 @@ function getNeighboursOfNode(node) {
     return neighbours;
 }
 
-function getAllNodesFromGrid(grid) {
+function getAllNodesFromGrid() {
     let nodes = [];
     for (let row of grid) {
         for (let node of row) {

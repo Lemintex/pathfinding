@@ -19,5 +19,21 @@
 }
 
 .cell-visited {
-    background-color: blue;
+    animation-name: visiting;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+}
+
+@keyframes visiting {
+    0% {
+        background-color: #08163d;
+        transform: scale(0.25);
+    }
+    50% {
+        background-color: #155e8f;
+    }
+    100% {
+        background-color: #30acff;
+        transform: scale(1);
+    }
 }

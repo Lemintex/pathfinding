@@ -4,6 +4,7 @@ import Cell from "./Cell/Cell";
 import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearch";
 import { beginBreadthFirstSearch } from "../Pathfinding Algorithms/BreadthFirstSearch";
 import { generateRecursionMaze } from "../Maze Generating Algorithm/RecursiveGeneration";
+import { unweightedDijkstras } from "../Pathfinding Algorithms/UnweightedDijkstras";
 
 import "./PathfindingVisualiser.css";
 
@@ -39,6 +40,9 @@ export default class PathfindingVisualiser extends Component {
                 </button>
                 <button onClick={() => this.visualiseBreadthFirst()}>
                     Visualise BFS
+                </button>
+                <button onClick={() => this.visualiseUnweightedDijkstras()}>
+                    Visualise Unweighted Dijkstras
                 </button>
                 <button onClick={() => this.generateRecursiveMaze()}>
                     Generate Recursive Maze
@@ -172,6 +176,22 @@ export default class PathfindingVisualiser extends Component {
                         `cell-${node.row}-${node.col}`
                     ).className = "cell cell-wall";
                 }
+                this.setState({ grid });
+            }, ANIMATION_SPEED * i);
+        }
+    }
+
+    visualiseUnweightedDijkstras() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        let visitedNodesInOrder = unweightedDijkstras(grid, start);
+        console.log(visitedNodesInOrder);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
                 this.setState({ grid });
             }, ANIMATION_SPEED * i);
         }
