@@ -5,7 +5,7 @@ import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearc
 import { beginBreadthFirstSearch } from "../Pathfinding Algorithms/BreadthFirstSearch";
 import { generateRecursionMaze } from "../Maze Generating Algorithm/RecursiveGeneration";
 import { unweightedDijkstras } from "../Pathfinding Algorithms/UnweightedDijkstras";
-
+import { generateNodeWeights } from "../Pathfinding Algorithms/GenerateNodeWeights";
 import "./PathfindingVisualiser.css";
 
 const GRID_LENGTH = 39;
@@ -47,6 +47,9 @@ export default class PathfindingVisualiser extends Component {
                 <button onClick={() => this.generateRecursiveMaze()}>
                     Generate Recursive Maze
                 </button>
+                <button onClick={() => this.generateNodeWeights()}>
+                    Generate Weights
+                </button>
                 <div>
                     {grid.map((row, rowIdx) => {
                         return (
@@ -58,6 +61,7 @@ export default class PathfindingVisualiser extends Component {
                                         isFinish,
                                         isStart,
                                         isWall,
+                                        weight,
                                     } = node;
                                     return (
                                         <Cell
@@ -67,6 +71,7 @@ export default class PathfindingVisualiser extends Component {
                                             isStart={isStart}
                                             isFinish={isFinish}
                                             isWall={isWall}
+                                            weight={weight}
                                             onMouseDown={() =>
                                                 this.handleMouseDown()
                                             }
@@ -121,6 +126,7 @@ export default class PathfindingVisualiser extends Component {
                     isWall: false,
                     isVisited: false,
                     distance: Infinity,
+                    weight: 0,
                 };
                 currentRow.push(cellInfo);
             }
@@ -185,7 +191,6 @@ export default class PathfindingVisualiser extends Component {
         let { grid } = this.state;
         let start = grid[START_CELL_ROW][START_CELL_COL];
         let visitedNodesInOrder = unweightedDijkstras(grid, start);
-        console.log(visitedNodesInOrder);
         for (let i = 0; i < visitedNodesInOrder.length; i++) {
             let node = visitedNodesInOrder[i];
             setTimeout(() => {
@@ -195,5 +200,13 @@ export default class PathfindingVisualiser extends Component {
                 this.setState({ grid });
             }, ANIMATION_SPEED * i);
         }
+    }
+
+    generateNodeWeights() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        grid = generateNodeWeights(grid, start);
+        console.table(grid);
+        this.setState({ grid });
     }
 }

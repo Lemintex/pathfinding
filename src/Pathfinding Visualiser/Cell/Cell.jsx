@@ -9,14 +9,17 @@ export default class Cell extends Component {
             isStart,
             isFinish,
             isWall,
+            weight,
             onMouseDown,
             onMouseEnter,
             onMouseUp,
         } = this.props;
         let classInfo = "";
+        console.log(weight);
         if (isStart) classInfo = "cell-start";
         else if (isFinish) classInfo = "cell-finish";
         else if (isWall) classInfo = "cell-wall";
+        else if (weight >= 3) classInfo = "cell-weight";
         // else if (isVisited) {
         //     console.log("VISITED");
         //     classInfo = "cell-visited";
