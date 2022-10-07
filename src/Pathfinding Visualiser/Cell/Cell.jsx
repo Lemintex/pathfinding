@@ -19,7 +19,11 @@ export default class Cell extends Component {
         if (isStart) classInfo = "cell-start";
         else if (isFinish) classInfo = "cell-finish";
         else if (isWall) classInfo = "cell-wall";
-        else if (weight >= 3) classInfo = "cell-weight";
+        else classInfo = `cell-weight-${Math.floor(weight / 2)}`;
+        // else if (weight === 0) classInfo = "cell-weight-0";
+        // else if (weight <= 1) classInfo = "cell-weight-1";
+        // else if (weight <= 3) classInfo = "cell-weight-2";
+        // else if (weight > 3) classInfo = "cell-weight-3";
         // else if (isVisited) {
         //     console.log("VISITED");
         //     classInfo = "cell-visited";

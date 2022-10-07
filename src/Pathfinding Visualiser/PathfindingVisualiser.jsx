@@ -5,6 +5,8 @@ import { beginDepthFirstSearch } from "../Pathfinding Algorithms/DepthFirstSearc
 import { beginBreadthFirstSearch } from "../Pathfinding Algorithms/BreadthFirstSearch";
 import { generateRecursionMaze } from "../Maze Generating Algorithm/RecursiveGeneration";
 import { unweightedDijkstras } from "../Pathfinding Algorithms/UnweightedDijkstras";
+import { weightedDijkstras } from "../Pathfinding Algorithms/WeightedDijkstras";
+import { unweightedAStar } from "../Pathfinding Algorithms/UnweightedAStar";
 import { generateNodeWeights } from "../Pathfinding Algorithms/GenerateNodeWeights";
 import "./PathfindingVisualiser.css";
 
@@ -44,12 +46,19 @@ export default class PathfindingVisualiser extends Component {
                 <button onClick={() => this.visualiseUnweightedDijkstras()}>
                     Visualise Unweighted Dijkstras
                 </button>
+                <button onClick={() => this.visualiseWeightedDijkstras()}>
+                    Visualise Weighted Dijkstras
+                </button>
+                <button onClick={() => this.visualiseUnweightedAStar()}>
+                    Visualise Unweighted A-Star
+                </button>
                 <button onClick={() => this.generateRecursiveMaze()}>
                     Generate Recursive Maze
                 </button>
                 <button onClick={() => this.generateNodeWeights()}>
                     Generate Weights
                 </button>
+
                 <div>
                     {grid.map((row, rowIdx) => {
                         return (
@@ -208,5 +217,35 @@ export default class PathfindingVisualiser extends Component {
         grid = generateNodeWeights(grid, start);
         console.table(grid);
         this.setState({ grid });
+    }
+
+    visualiseWeightedDijkstras() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        let visitedNodesInOrder = weightedDijkstras(grid, start);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, ANIMATION_SPEED * i);
+        }
+    }
+    visualiseUnweightedAStar() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        let finish = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+        let visitedNodesInOrder = unweightedAStar(grid, start, finish);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, ANIMATION_SPEED * i);
+        }
     }
 }
