@@ -1,7 +1,7 @@
 let nodesToBeVisited = [];
 let visitedNodesInOrder = [];
 let grid;
-let average;
+let averageWeight;
 // worth noting this is essentially BFS as all nodes are weighted equally
 export function unweightedAStar(g, startNode, finishNode) {
     grid = g;
@@ -29,6 +29,7 @@ function updateNeighboursOfNode(node, finishNode) {
     for (let n of neighbours) {
         let heuristic =
             Math.abs(n.row - finishNode.row) + Math.abs(n.col - finishNode.col);
+        heuristic *= averageWeight;
         n.distance = node.distance + heuristic;
     }
 }
@@ -45,13 +46,15 @@ function getNeighboursOfNode(node) {
 
 function getAllNodesFromGrid() {
     let nodes = [];
+    averageWeight = 0;
     for (let row of grid) {
         for (let node of row) {
             nodes.push(node);
-            average += node.weight;
+            averageWeight += node.weight;
         }
     }
-    average /= grid.length * grid[0].length;
-    average = Math.round(average);
+    averageWeight /= grid.length * grid[0].length;
+    averageWeight = Math.round(averageWeight);
+    averageWeight = Math.max(averageWeight, 1);
     return nodes;
 }
