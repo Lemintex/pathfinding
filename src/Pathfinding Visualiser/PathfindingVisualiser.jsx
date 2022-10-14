@@ -233,6 +233,7 @@ export default class PathfindingVisualiser extends Component {
             }, ANIMATION_SPEED * i);
         }
     }
+
     visualiseUnweightedAStar() {
         let { grid } = this.state;
         let start = grid[START_CELL_ROW][START_CELL_COL];
