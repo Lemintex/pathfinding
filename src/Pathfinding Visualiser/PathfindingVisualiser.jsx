@@ -7,6 +7,7 @@ import { generateRecursionMaze } from "../Maze Generating Algorithm/RecursiveGen
 import { unweightedDijkstras } from "../Pathfinding Algorithms/UnweightedDijkstras";
 import { weightedDijkstras } from "../Pathfinding Algorithms/WeightedDijkstras";
 import { unweightedAStar } from "../Pathfinding Algorithms/UnweightedAStar";
+import { weightedAStar } from "../Pathfinding Algorithms/WeightedAStar";
 import { generateNodeWeights } from "../Pathfinding Algorithms/GenerateNodeWeights";
 import "./PathfindingVisualiser.css";
 
@@ -51,6 +52,9 @@ export default class PathfindingVisualiser extends Component {
                 </button>
                 <button onClick={() => this.visualiseUnweightedAStar()}>
                     Visualise Unweighted A-Star
+                </button>
+                <button onClick={() => this.visualiseWeightedAStar()}>
+                    Visualise Weighted A-Star
                 </button>
                 <button onClick={() => this.generateRecursiveMaze()}>
                     Generate Recursive Maze
@@ -239,6 +243,22 @@ export default class PathfindingVisualiser extends Component {
         let start = grid[START_CELL_ROW][START_CELL_COL];
         let finish = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
         let visitedNodesInOrder = unweightedAStar(grid, start, finish);
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            let node = visitedNodesInOrder[i];
+            setTimeout(() => {
+                document.getElementById(
+                    `cell-${node.row}-${node.col}`
+                ).className = "cell cell-visited";
+                this.setState({ grid });
+            }, ANIMATION_SPEED * i);
+        }
+    }
+
+    visualiseWeightedAStar() {
+        let { grid } = this.state;
+        let start = grid[START_CELL_ROW][START_CELL_COL];
+        let finish = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+        let visitedNodesInOrder = weightedAStar(grid, start, finish);
         for (let i = 0; i < visitedNodesInOrder.length; i++) {
             let node = visitedNodesInOrder[i];
             setTimeout(() => {
