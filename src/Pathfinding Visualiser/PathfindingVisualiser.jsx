@@ -60,7 +60,7 @@ export default class PathfindingVisualiser extends Component {
                     Generate Recursive Maze
                 </button>
                 <button onClick={() => this.generateNodeWeights()}>
-                    Generate Weights
+                    Generate Cell Weights
                 </button>
 
                 <div>
