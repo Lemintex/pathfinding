@@ -34,3 +34,23 @@ function NavItem(props) {
         </li>
     );
 }
+
+function DropDownNavMenu(props) {
+    const [open, setOpen] = useState(false);
+
+    return <label className='nav-item-drop-down-default'>Algorithm</label>;
+}
+
+function DropDownNavItem(props) {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <select className='nav-item-drop-down'>
+            <a href='#' className='image-button' onClick={() => setOpen(!open)}>
+                {props.image}
+            </a>
+
+            {open && props.children}
+        </select>
+    );
+}
