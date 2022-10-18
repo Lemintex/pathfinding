@@ -3,7 +3,7 @@ let visitedNodesInOrder = [];
 let grid;
 let averageWeight;
 // worth noting this is essentially BFS as all nodes are weighted equally
-export function unweightedAStar(g, startNode, finishNode) {
+export function weightedAStar(g, startNode, finishNode) {
     grid = g;
     nodesToBeVisited = getAllNodesFromGrid();
     startNode.distance = 0;

@@ -5,10 +5,10 @@ import "./Navbar.css";
 export default function Nav(props) {
     return (
         <Navbar>
-            <NavItem image='HELLO'>
-                <NavItem image='WORLD'></NavItem>
-            </NavItem>
-            <NavItem image='WORLD'></NavItem>
+            <DropDownNavMenu>
+                <DropDownNavItem text='Hello'></DropDownNavItem>
+                <DropDownNavItem text='World'></DropDownNavItem>
+            </DropDownNavMenu>
         </Navbar>
     );
 }
@@ -36,21 +36,27 @@ function NavItem(props) {
 }
 
 function DropDownNavMenu(props) {
-    const [open, setOpen] = useState(false);
-
-    return <label className='nav-item-drop-down-default'>Algorithm</label>;
+    return (
+        <form>
+            <select>{props.children}</select>
+        </form>
+    );
 }
 
+// function DropDownNavItem(props) {
+//     const [open, setOpen] = useState(false);
+
+//     return (
+//         <select className='nav-item-drop-down'>
+//             <a href='#' className='image-button' onClick={() => setOpen(!open)}>
+//                 {props.image}
+//             </a>
+
+//             {open && props.children}
+//         </select>
+//     );
+// }
+
 function DropDownNavItem(props) {
-    const [open, setOpen] = useState(false);
-
-    return (
-        <select className='nav-item-drop-down'>
-            <a href='#' className='image-button' onClick={() => setOpen(!open)}>
-                {props.image}
-            </a>
-
-            {open && props.children}
-        </select>
-    );
+    return <option value={props.text}>{props.text}</option>;
 }
