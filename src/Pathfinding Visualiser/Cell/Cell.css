@@ -48,6 +48,7 @@
     }
     50% {
         background-color: #155e8f;
+        transform: scale(1.1);
     }
     100% {
         background-color: #30acff;

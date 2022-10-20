@@ -16,7 +16,14 @@ export default function Nav(props) {
 function Navbar(props) {
     return (
         <nav className='navbar'>
-            <ul className='navbar-nav'> {props.children} </ul>
+            <ul
+                className='navbar-nav'
+                onChange={() => {
+                    props.Change(value);
+                }}
+            >
+                {props.children}
+            </ul>
         </nav>
     );
 }
