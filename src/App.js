@@ -7,7 +7,7 @@ function App() {
     return (
         <>
             <div className='nav'>
-                <Nav modeChange={Change(mode)}></Nav>
+                <Nav modeChange={updateMode()}></Nav>
             </div>
             <div className='Main'>
                 <PathfindingVisualiser mode={mode}></PathfindingVisualiser>
@@ -16,7 +16,9 @@ function App() {
     );
 }
 
-function Change(m) {
+function updateMode() {
+    var m = document.querySelector("#algo");
+    console.log(m);
     mode = m;
 }
 
