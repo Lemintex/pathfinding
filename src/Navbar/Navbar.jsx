@@ -5,7 +5,7 @@ import "./Navbar.css";
 export default function Nav(props) {
     return (
         <Navbar>
-            <DropDownNavMenu>
+            <DropDownNavMenu modeChange={props.modeChange}>
                 <DropDownNavItem text='Hello'></DropDownNavItem>
                 <DropDownNavItem text='World'></DropDownNavItem>
             </DropDownNavMenu>
@@ -23,13 +23,10 @@ function Navbar(props) {
 
 function DropDownNavMenu(props) {
     return (
-        <form
-            id='algo'
-            onChange={() => {
-                props.modeChange();
-            }}
-        >
-            <select>{props.children}</select>
+        <form>
+            <select id='algo' onChange={props.modeChange}>
+                {props.children}
+            </select>
         </form>
     );
 }
