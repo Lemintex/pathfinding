@@ -10,16 +10,19 @@ function App() {
                 <Nav modeChange={updateMode}></Nav>
             </div>
             <div className='Main'>
-                <PathfindingVisualiser mode={mode}></PathfindingVisualiser>
+                <PathfindingVisualiser></PathfindingVisualiser>
             </div>
         </>
     );
 }
 
 function updateMode() {
-    var m = document.querySelector("#algo");
-    console.log(m.value);
+    var m = document.querySelector("#algo").value;
     mode = m;
+}
+
+function visualiseAlgorithm() {
+
 }
 
 export default App;
