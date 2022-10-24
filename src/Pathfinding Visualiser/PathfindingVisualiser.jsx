@@ -148,6 +148,16 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid });
     }
 
+    visualiseAlgorithm(mode) {
+        switch (mode) {
+            case value:
+                break;
+
+            default:
+                break;
+        }
+    }
+
     visualiseDepthFirst() {
         let { grid } = this.state;
         let start = grid[START_CELL_ROW][START_CELL_COL];
