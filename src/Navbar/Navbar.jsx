@@ -22,9 +22,14 @@ function Navbar(props) {
 }
 
 function DropDownNavMenu(props) {
+    // let e = document.getElementById("algorithmSelect");
+    // let text = e.options[e.selectedIndex].text;
     return (
         <form>
-            <select id='algo' onChange={props.modeChange}>
+            <select
+                id='algorithmSelect'
+                // onChange={props.modeChange.bind(this, text)}
+            >
                 {props.children}
             </select>
         </form>
