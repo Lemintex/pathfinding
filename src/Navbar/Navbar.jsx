@@ -5,10 +5,11 @@ import "./Navbar.css";
 export default function Nav(props) {
     return (
         <Navbar>
-            <DropDownNavMenu modeChange={props.modeChange}>
-                <DropDownNavItem text='Hello'></DropDownNavItem>
-                <DropDownNavItem text='World'></DropDownNavItem>
-            </DropDownNavMenu>
+            <DropDownNavMenu
+                options={props.options}
+                selected={props.selected}
+                modeChange={props.algorithmSelectChange}
+            ></DropDownNavMenu>
         </Navbar>
     );
 }
@@ -22,15 +23,14 @@ function Navbar(props) {
 }
 
 function DropDownNavMenu(props) {
-    // let e = document.getElementById("algorithmSelect");
-    // let text = e.options[e.selectedIndex].text;
     return (
         <form>
-            <select
-                id='algorithmSelect'
-                // onChange={props.modeChange.bind(this, text)}
-            >
-                {props.children}
+            <select value={props.selected} onChange={props.modeChange}>
+                {props.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.text}
+                    </option>
+                ))}
             </select>
         </form>
     );

@@ -5,15 +5,33 @@ import { useState } from "react";
 
 var mode = 0;
 function App() {
-    const [state, setState] = useState();
-    const updateState = (text) => {
-        setState(text);
-        console.log(text);
+    const options = [
+        { value: "UnweightedDijkstras", text: "Unweighted Dijkstras" },
+        {
+            value: "UnweightedDepthFirst",
+            text: "Unweighted Depth First Search",
+        },
+        {
+            value: "UnweightedBreadthFirst",
+            text: "Unweighted Breadth First Search",
+        },
+    ];
+
+    const [selected, setSelected] = useState(options[0].value);
+
+    const onChange = (e) => {
+        console.log("HI");
+        setSelected(e.target.value);
+        console.log(e.target.value);
     };
     return (
         <>
             <div className='nav'>
-                <Nav modeChange={updateState}></Nav>
+                <Nav
+                    options={options}
+                    selected={selected}
+                    algorithmSelectChange={onChange}
+                ></Nav>
             </div>
             <div className='Main'>
                 <PathfindingVisualiser></PathfindingVisualiser>
