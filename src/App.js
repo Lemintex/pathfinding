@@ -20,7 +20,6 @@ function App() {
     const [selected, setSelected] = useState(options[0].value);
 
     const onChange = (e) => {
-        console.log("HI");
         setSelected(e.target.value);
         console.log(e.target.value);
     };
@@ -34,7 +33,9 @@ function App() {
                 ></Nav>
             </div>
             <div className='Main'>
-                <PathfindingVisualiser></PathfindingVisualiser>
+                <PathfindingVisualiser
+                    algorithm={selected}
+                ></PathfindingVisualiser>
             </div>
         </>
     );
