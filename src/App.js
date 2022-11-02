@@ -21,7 +21,6 @@ function App() {
 
     const onChange = (e) => {
         setSelected(e.target.value);
-        console.log(e.target.value);
     };
     return (
         <>
