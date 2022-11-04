@@ -148,7 +148,8 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid });
     }
 
-    updateSelectedAlgorithm(algorithm) {
+    activateSelectedAlgorithm(algorithm) {
+        console.log("TEST");
         switch (algorithm) {
         }
     }

@@ -3,16 +3,20 @@ import { useState } from "react";
 
 import "./Navbar.css";
 export default function Nav(props) {
+    const [state, setState] = useState();
+
+    const updateDropdownState = (stateArg) => {
+        setState(stateArg);
+    };
+
+    const beginAnimation = () => {
+        props.algorithmStart(state);
+    };
+
     return (
         <Navbar>
-            <DropDownNavMenu
-                options={props.options}
-                selected={props.selected}
-                modeChange={props.algorithmSelectChange}
-            ></DropDownNavMenu>
-            <StartAlgorithm
-                activateAlgorithm={props.algorithmSelectChange}
-            ></StartAlgorithm>
+            <DropDownNavMenu modeChange={updateDropdownState}></DropDownNavMenu>
+            <StartAlgorithm beginAnimation={beginAnimation}></StartAlgorithm>
         </Navbar>
     );
 }
@@ -27,7 +31,10 @@ function Navbar(props) {
 
 function DropDownNavMenu(props) {
     const options = [
-        { value: "UnweightedDijkstras", text: "Unweighted Dijkstras" },
+        {
+            value: "UnweightedDijkstras",
+            text: "Unweighted Dijkstras",
+        },
         {
             value: "UnweightedDepthFirst",
             text: "Unweighted Depth First Search",
@@ -38,16 +45,13 @@ function DropDownNavMenu(props) {
         },
     ];
 
-    const [state, setState] = useState(options[0]);
-
     const updateSelected = (e) => {
-        setState(e.target.value);
-        console.log(state);
+        props.modeChange(e.target.value);
     };
 
     return (
         <form>
-            <select value={state} onChange={updateSelected}>
+            <select onChange={updateSelected}>
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.text}
@@ -59,5 +63,5 @@ function DropDownNavMenu(props) {
 }
 
 function StartAlgorithm(props) {
-    return <button onClick={props.modeChange}>TEST</button>;
+    return <button onClick={props.beginAnimation}>TEST</button>;
 }

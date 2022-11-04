@@ -5,16 +5,17 @@ import Nav from "./Navbar/Navbar";
 
 // import { activateSelectedAlgorithm } from "./Pathfinding Visualiser/PathfindingVisualiser";
 
-var mode = 0;
 function App() {
-    const onChange = (e) => {
-        console.log(e.target.value);
+    const [state, setState] = useState();
+    const onStart = (algorithm) => {
+        setState(algorithm);
+        console.log(state);
     };
     return (
         <>
             <div className='nav'>
                 <Nav
-                    algorithmSelectChange={onChange}
+                    algorithmStart={onStart}
                     // activateAlgorithm={() =>
                     //     // activateSelectedAlgorithm(selected)
                     // }
