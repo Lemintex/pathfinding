@@ -14,12 +14,7 @@ function App() {
     return (
         <>
             <div className='nav'>
-                <Nav
-                    algorithmStart={onStart}
-                    // activateAlgorithm={() =>
-                    //     // activateSelectedAlgorithm(selected)
-                    // }
-                ></Nav>
+                <Nav algorithmStart={onStart}></Nav>
             </div>
             <div className='Main'>
                 <PathfindingVisualiser></PathfindingVisualiser>
