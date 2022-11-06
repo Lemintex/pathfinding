@@ -9,7 +9,6 @@ function App() {
     const [state, setState] = useState();
     const onStart = (algorithm) => {
         setState(algorithm);
-        console.log(state);
     };
     return (
         <>
@@ -22,10 +21,5 @@ function App() {
         </>
     );
 }
-
-// function updateMode() {
-//     var m = document.querySelector("#algo").value;
-//     mode = m;
-// }
 
 export default App;
