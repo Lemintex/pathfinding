@@ -3,8 +3,6 @@ import "./App.css";
 import PathfindingVisualiser from "./Pathfinding Visualiser/PathfindingVisualiser";
 import Nav from "./Navbar/Navbar";
 
-// import { activateSelectedAlgorithm } from "./Pathfinding Visualiser/PathfindingVisualiser";
-
 function App() {
     const [state, setState] = useState();
     const onStart = (algorithm) => {
