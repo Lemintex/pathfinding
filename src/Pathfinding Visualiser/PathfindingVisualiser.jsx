@@ -33,6 +33,12 @@ export default class PathfindingVisualiser extends Component {
         this.initialiseGrid();
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.mode != this.props.mode) {
+            console.log(this.props.mode);
+        }
+    }
+
     render() {
         let grid = this.state.grid;
 

@@ -14,7 +14,7 @@ function App() {
                 <Nav algorithmStart={onStart}></Nav>
             </div>
             <div className='Main'>
-                <PathfindingVisualiser></PathfindingVisualiser>
+                <PathfindingVisualiser mode={state}></PathfindingVisualiser>
             </div>
         </>
     );
