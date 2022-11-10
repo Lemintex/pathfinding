@@ -157,6 +157,8 @@ export default class PathfindingVisualiser extends Component {
     activateSelectedAlgorithm(algorithm) {
         console.log("TEST");
         switch (algorithm) {
+            case "UnweightedDijkstras":
+                break;
         }
     }
 
