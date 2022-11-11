@@ -40,10 +40,6 @@ function DropDownNavMenu(props) {
             text: "Breadth First Search",
         },
         {
-            value: "UnweightedDijkstras",
-            text: "Unweighted Dijkstras",
-        },
-        {
             value: "WeightedDijkstras",
             text: "Weighted Dijkstras",
         },
@@ -70,8 +66,8 @@ function DropDownNavMenu(props) {
     };
 
     return (
-        <form>
-            <select onChange={updateSelected}>
+        <form className='algorithm-select'>
+            <select className='algorithm-select' onChange={updateSelected}>
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.text}

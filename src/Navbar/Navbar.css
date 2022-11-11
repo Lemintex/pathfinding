@@ -32,3 +32,7 @@ ul {
 .image-button {
     width: calc(var(--nav-size) * 0.6);
 }
+
+.algorithm-select {
+    align-self: center;
+}
