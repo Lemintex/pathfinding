@@ -36,6 +36,7 @@ export default class PathfindingVisualiser extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.mode != this.props.mode) {
             console.log(this.props.mode);
+            this.activateSelectedAlgorithm();
         }
     }
 
@@ -154,10 +155,39 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid });
     }
 
-    activateSelectedAlgorithm(algorithm) {
+    activateSelectedAlgorithm() {
         console.log("TEST");
-        switch (algorithm) {
+        switch (this.props.mode) {
+            case "DepthFirstSearch":
+                this.visualiseDepthFirst();
+                break;
+
+            case "BreadthFirstSearch":
+                this.visualiseBreadthFirst();
+                break;
+
             case "UnweightedDijkstras":
+                this.visualiseUnweightedDijkstras();
+                break;
+
+            case "WeightedDijkstras":
+                this.visualiseWeightedDijkstras();
+                break;
+
+            case "UnweightedAStar":
+                this.visualiseUnweightedAStar();
+                break;
+
+            case "WeightedAStar":
+                this.visualiseWeightedAStar();
+                break;
+
+            case "RecursiveMaze":
+                this.generateRecursiveMaze();
+                break;
+
+            case "GenerateWeights":
+                this.generateNodeWeights();
                 break;
         }
     }

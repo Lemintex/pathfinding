@@ -32,16 +32,36 @@ function Navbar(props) {
 function DropDownNavMenu(props) {
     const options = [
         {
+            value: "DepthFirstSearch",
+            text: "Depth First Search",
+        },
+        {
+            value: "BreadthFirstSearch",
+            text: "Breadth First Search",
+        },
+        {
             value: "UnweightedDijkstras",
             text: "Unweighted Dijkstras",
         },
         {
-            value: "UnweightedDepthFirst",
-            text: "Unweighted Depth First Search",
+            value: "WeightedDijkstras",
+            text: "Weighted Dijkstras",
         },
         {
-            value: "UnweightedBreadthFirst",
-            text: "Unweighted Breadth First Search",
+            value: "UnweightedAStar",
+            text: "Unweighted A-Star",
+        },
+        {
+            value: "WeightedAStar",
+            text: "Weighted A-Star",
+        },
+        {
+            value: "RecursiveMaze",
+            text: "Generate Recursive Maze",
+        },
+        {
+            value: "GenerateWeights",
+            text: "Generate Cell Weights",
         },
     ];
 
