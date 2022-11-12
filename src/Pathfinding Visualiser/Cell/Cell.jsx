@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import "./Cell.css";
-//FORGOT TO COMMIT TODAY
 export default class Cell extends Component {
     render() {
         let {
@@ -11,6 +10,7 @@ export default class Cell extends Component {
             isFinish,
             isWall,
             weight,
+            previousNode,
             onMouseDown,
             onMouseEnter,
             onMouseUp,

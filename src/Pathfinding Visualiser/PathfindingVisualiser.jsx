@@ -33,8 +33,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.mode != this.props.mode) {
-            console.log(this.props.mode);
+        if (prevProps.mode !== this.props.mode) {
             this.activateSelectedAlgorithm();
         }
     }
@@ -95,7 +94,6 @@ export default class PathfindingVisualiser extends Component {
     }
 
     handleMouseEnter(row, col) {
-        // console.log(row);
         this.setState({ selectedCellIndex: [row, col] });
         if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
@@ -130,7 +128,6 @@ export default class PathfindingVisualiser extends Component {
     }
 
     activateSelectedAlgorithm() {
-        console.log("TEST");
         switch (this.props.mode) {
             case "DepthFirstSearch":
                 this.visualiseDepthFirst();
@@ -158,6 +155,9 @@ export default class PathfindingVisualiser extends Component {
 
             case "GenerateWeights":
                 this.generateNodeWeights();
+                break;
+
+            default:
                 break;
         }
     }
