@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import "./Cell.css";
-export default class Cell extends Component {
+import "./Node.css";
+export default class Node extends Component {
     render() {
         let {
             row,
@@ -9,6 +9,7 @@ export default class Cell extends Component {
             isStart,
             isFinish,
             isWall,
+            isPath,
             weight,
             previousNode,
             onMouseDown,
@@ -17,15 +18,16 @@ export default class Cell extends Component {
         } = this.props;
         let classInfo = "";
         console.log(weight);
-        if (isStart) classInfo = "cell-start";
-        else if (isFinish) classInfo = "cell-finish";
-        else if (isWall) classInfo = "cell-wall";
-        else classInfo = `cell-weight-${Math.floor(weight / 2)}`;
+        if (isStart) classInfo = "node-start";
+        else if (isFinish) classInfo = "node-finish";
+        else if (isWall) classInfo = "node-wall";
+        else if (isPath) classInfo = "node-path";
+        else classInfo = `node-weight-${Math.floor(weight / 2)}`;
 
         return (
             <div
-                id={`cell-${row}-${col}`}
-                className={`cell ${classInfo}`}
+                id={`node-${row}-${col}`}
+                className={`node ${classInfo}`}
                 onMouseDown={() => onMouseDown()}
                 onMouseEnter={() => onMouseEnter(row, col)}
                 onMouseUp={() => onMouseUp()}

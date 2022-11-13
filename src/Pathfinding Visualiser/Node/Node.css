@@ -1,4 +1,4 @@
-.cell {
+.node {
     width: 42px;
     height: 42px;
     outline: 1px solid black;
@@ -6,37 +6,43 @@
     display: inline-block;
 }
 
-.cell-start {
+.node-start {
     background-color: green;
 }
 
-.cell-finish {
+.node-finish {
     background-color: red;
 }
 
-.cell-wall {
+.node-wall {
     background-color: black;
 }
 
-.cell-visited {
+.node-visited {
     animation-name: visiting;
     animation-fill-mode: forwards;
     animation-duration: 2s;
 }
 
-.cell-weight-0 {
+.node-path {
+    animation-name: final-path;
+    animation-fill-mode: forwards;
+    animation-duration: 0.25s;
+}
+
+.node-weight-0 {
     outline: 1px solid black;
     background-color: rgb(240);
 }
-.cell-weight-1 {
+.node-weight-1 {
     outline: 1px solid black;
     background-color: rgb(250, 200, 200);
 }
-.cell-weight-2 {
+.node-weight-2 {
     outline: 1px solid black;
     background-color: rgb(250, 150, 150);
 }
-.cell-weight-3 {
+.node-weight-3 {
     outline: 1px solid black;
     background-color: rgb(250, 50, 50);
 }
@@ -57,4 +63,15 @@
 }
 
 @keyframes final-path {
+    25% {
+        background-color: #ffa300;
+        transform: scale(0.6);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        background-color: #acff00;
+        transform: scale(1);
+    }
 }

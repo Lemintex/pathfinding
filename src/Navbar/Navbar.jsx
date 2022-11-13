@@ -57,7 +57,7 @@ function DropDownNavMenu(props) {
         },
         {
             value: "GenerateWeights",
-            text: "Generate Cell Weights",
+            text: "Generate Node Weights",
         },
     ];
 
