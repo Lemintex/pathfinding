@@ -163,23 +163,40 @@ export default class PathfindingVisualiser extends Component {
                 break;
         }
         console.log("test");
-        this.visualisePathFound();
+        // this.visualisePathFound();
+    }
+
+    getPathFound() {
+        let path = [];
+        let { grid } = this.state;
+        let node = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        if (node.previousNode === null) return null;
+        node = node.previousNode;
+        while (node.previousNode !== null && !node.previousNode.isStart) {
+            path.unshift(node);
+            node = node.previousNode;
+        }
+        return path;
     }
 
     visualisePathFound() {
         let { grid } = this.state;
         let currentNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        let i = 0;
         console.log(currentNode);
         while (currentNode.previousNode !== null && !currentNode.isStart) {
             // let { grid } = this.state;
-            let { row, col } = currentNode;
-            // grid[row][col].isPath = true;
+            setTimeout(() => {
+                currentNode = currentNode.previousNode;
+                let { row, col } = currentNode;
+                // grid[row][col].isPath = true;
 
-            document.getElementById(`node-${row}-${col}`).className =
-                "node node-path";
-            this.setState({ grid });
-            currentNode = currentNode.previousNode;
-            console.log(currentNode);
+                document.getElementById(`node-${row}-${col}`).className =
+                    "node node-path";
+                this.setState({ grid });
+                console.log(currentNode);
+                i++;
+            }, ANIMATION_SPEED * i);
         }
     }
 

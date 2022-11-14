@@ -1,5 +1,5 @@
+var nodesToBeVisited = [];
 export function beginDepthFirstSearch(grid, startNode) {
-    var nodesToBeVisited = [];
     let nodesInVisitedOrder = [];
     nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
@@ -13,24 +13,25 @@ export function beginDepthFirstSearch(grid, startNode) {
         let { row, col } = currentNode;
         if (col > 0) {
             let node = grid[row][col - 1];
-            visitNode(node, nodesToBeVisited);
+            visitNode(currentNode, node);
         }
         if (row < grid.length - 1) {
             let node = grid[row + 1][col];
-            visitNode(node, nodesToBeVisited);
+            visitNode(currentNode, node);
         }
         if (col < grid[0].length - 1) {
             let node = grid[row][col + 1];
-            visitNode(node, nodesToBeVisited);
+            visitNode(currentNode, node);
         }
         if (row > 0) {
             let node = grid[row - 1][col];
-            visitNode(node, nodesToBeVisited);
+            visitNode(currentNode, node);
         }
     }
 }
 
-function visitNode(node, stack) {
+function visitNode(previousNode, node) {
     if (node.isVisited || node.isWall) return;
-    stack.push(node);
+    node.previousNode = previousNode;
+    nodesToBeVisited.push(node);
 }
