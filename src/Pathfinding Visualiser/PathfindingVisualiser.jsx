@@ -172,7 +172,7 @@ export default class PathfindingVisualiser extends Component {
         let node = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         if (node.previousNode === null) return null;
         node = node.previousNode;
-        while (node.previousNode !== null && !node.previousNode.isStart) {
+        while (node.previousNode !== null && !node.isStart) {
             path.unshift(node);
             node = node.previousNode;
         }
@@ -181,13 +181,11 @@ export default class PathfindingVisualiser extends Component {
 
     visualisePathFound() {
         let { grid } = this.state;
-        let currentNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        let i = 0;
-        console.log(currentNode);
-        while (currentNode.previousNode !== null && !currentNode.isStart) {
-            // let { grid } = this.state;
+        let path = this.getPathFound();
+        let currentNode;
+        for (let i = 0; i < path.length; i++) {
             setTimeout(() => {
-                currentNode = currentNode.previousNode;
+                currentNode = path[i];
                 let { row, col } = currentNode;
                 // grid[row][col].isPath = true;
 
@@ -195,8 +193,27 @@ export default class PathfindingVisualiser extends Component {
                     "node node-path";
                 this.setState({ grid });
                 console.log(currentNode);
-                i++;
             }, ANIMATION_SPEED * i);
+        }
+    }
+
+    animateAlgorithm(visitedNodesInOrder) {
+        let { grid } = this.state;
+        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+            if (i === visitedNodesInOrder.length) {
+                setTimeout(() => {
+                    this.visualisePathFound();
+                }, ANIMATION_SPEED * i);
+            } else {
+                let node = visitedNodesInOrder[i];
+                if (node.isStart || node.isFinish) continue;
+                setTimeout(() => {
+                    document.getElementById(
+                        `node-${node.row}-${node.col}`
+                    ).className = "node node-visited";
+                    this.setState({ grid });
+                }, ANIMATION_SPEED * i);
+            }
         }
     }
 
@@ -204,32 +221,14 @@ export default class PathfindingVisualiser extends Component {
         let { grid } = this.state;
         let start = grid[START_NODE_ROW][START_NODE_COL];
         let visitedNodesInOrder = beginDepthFirstSearch(grid, start);
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
-            let node = visitedNodesInOrder[i];
-            if (node.isStart || node.isFinish) continue;
-            setTimeout(() => {
-                document.getElementById(
-                    `node-${node.row}-${node.col}`
-                ).className = "node node-visited";
-                this.setState({ grid });
-            }, ANIMATION_SPEED * i);
-        }
+        this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseBreadthFirst() {
         let { grid } = this.state;
         let start = grid[START_NODE_ROW][START_NODE_COL];
         let visitedNodesInOrder = beginBreadthFirstSearch(grid, start);
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
-            let node = visitedNodesInOrder[i];
-            if (node.isStart || node.isFinish) continue;
-            setTimeout(() => {
-                document.getElementById(
-                    `node-${node.row}-${node.col}`
-                ).className = "node node-visited";
-                this.setState({ grid });
-            }, ANIMATION_SPEED * i);
-        }
+        this.animateAlgorithm(visitedNodesInOrder);
     }
 
     generateRecursiveMaze() {
@@ -264,15 +263,7 @@ export default class PathfindingVisualiser extends Component {
         let { grid } = this.state;
         let start = grid[START_NODE_ROW][START_NODE_COL];
         let visitedNodesInOrder = weightedDijkstras(grid, start);
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
-            let node = visitedNodesInOrder[i];
-            setTimeout(() => {
-                document.getElementById(
-                    `node-${node.row}-${node.col}`
-                ).className = "node node-visited";
-                this.setState({ grid });
-            }, ANIMATION_SPEED * i);
-        }
+        this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseUnweightedAStar() {
@@ -280,15 +271,7 @@ export default class PathfindingVisualiser extends Component {
         let start = grid[START_NODE_ROW][START_NODE_COL];
         let finish = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         let visitedNodesInOrder = unweightedAStar(grid, start, finish);
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
-            let node = visitedNodesInOrder[i];
-            setTimeout(() => {
-                document.getElementById(
-                    `node-${node.row}-${node.col}`
-                ).className = "node node-visited";
-                this.setState({ grid });
-            }, ANIMATION_SPEED * i);
-        }
+        this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseWeightedAStar() {
@@ -296,14 +279,6 @@ export default class PathfindingVisualiser extends Component {
         let start = grid[START_NODE_ROW][START_NODE_COL];
         let finish = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         let visitedNodesInOrder = weightedAStar(grid, start, finish);
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
-            let node = visitedNodesInOrder[i];
-            setTimeout(() => {
-                document.getElementById(
-                    `node-${node.row}-${node.col}`
-                ).className = "node node-visited";
-                this.setState({ grid });
-            }, ANIMATION_SPEED * i);
-        }
+        this.animateAlgorithm(visitedNodesInOrder);
     }
 }
