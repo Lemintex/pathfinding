@@ -4,7 +4,7 @@ import PathfindingVisualiser from "./Pathfinding Visualiser/PathfindingVisualise
 import Nav from "./Navbar/Navbar";
 
 function App() {
-    const [state, setState] = useState();
+    const [state, setState] = useState("DepthFirst");
     const onStart = (algorithm) => {
         setState(algorithm);
     };

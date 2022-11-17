@@ -29,7 +29,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     componentDidMount() {
-        this.initialiseGrid();
+        this.generateEmptyGrid();
     }
 
     componentDidUpdate(prevProps) {
@@ -105,7 +105,7 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ mousePressed: false });
     }
 
-    initialiseGrid() {
+    generateEmptyGrid() {
         let grid = [];
         for (let i = 0; i < GRID_HEIGHT; i++) {
             var currentRow = [];
@@ -162,8 +162,6 @@ export default class PathfindingVisualiser extends Component {
             default:
                 break;
         }
-        console.log("test");
-        // this.visualisePathFound();
     }
 
     getPathFound() {
@@ -173,27 +171,26 @@ export default class PathfindingVisualiser extends Component {
         if (node.previousNode === null) return null;
         node = node.previousNode;
         while (node.previousNode !== null && !node.isStart) {
-            path.unshift(node);
+            path.push(node);
             node = node.previousNode;
         }
         return path;
     }
 
-    visualisePathFound() {
+    animatePathFound() {
         let { grid } = this.state;
         let path = this.getPathFound();
         let currentNode;
-        for (let i = 0; i < path.length; i++) {
+        let animOrder = 0;
+        for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
                 currentNode = path[i];
                 let { row, col } = currentNode;
-                // grid[row][col].isPath = true;
 
                 document.getElementById(`node-${row}-${col}`).className =
                     "node node-path";
                 this.setState({ grid });
-                console.log(currentNode);
-            }, ANIMATION_SPEED * i);
+            }, ANIMATION_SPEED * animOrder);
         }
     }
 
@@ -202,7 +199,7 @@ export default class PathfindingVisualiser extends Component {
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
                 setTimeout(() => {
-                    this.visualisePathFound();
+                    this.animatePathFound();
                 }, ANIMATION_SPEED * i);
             } else {
                 let node = visitedNodesInOrder[i];

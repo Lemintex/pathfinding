@@ -15,8 +15,12 @@ export default function Nav(props) {
 
     return (
         <Navbar>
+            <ClickableButton onclick='' text='Clear'></ClickableButton>
             <DropDownNavMenu modeChange={updateDropdownState}></DropDownNavMenu>
-            <StartAlgorithm beginAnimation={beginAnimation}></StartAlgorithm>
+            <ClickableButton
+                onclick={beginAnimation}
+                text='Animate'
+            ></ClickableButton>
         </Navbar>
     );
 }
@@ -78,6 +82,6 @@ function DropDownNavMenu(props) {
     );
 }
 
-function StartAlgorithm(props) {
-    return <button onClick={props.beginAnimation}>TEST</button>;
+function ClickableButton(props) {
+    return <button onClick={props.onclick}>{props.text}</button>;
 }
