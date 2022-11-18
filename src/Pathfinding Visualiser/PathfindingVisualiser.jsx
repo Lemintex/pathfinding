@@ -23,6 +23,7 @@ export default class PathfindingVisualiser extends Component {
         super(props);
         this.state = {
             grid: [],
+            resetGrid: false,
             mousePressed: false,
             selectedNodeIndex: [],
         };
@@ -252,7 +253,6 @@ export default class PathfindingVisualiser extends Component {
         let { grid } = this.state;
         let start = grid[START_NODE_ROW][START_NODE_COL];
         grid = generateNodeWeights(grid, start);
-        console.table(grid);
         this.setState({ grid });
     }
 
