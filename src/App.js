@@ -8,6 +8,10 @@ function App() {
     const onStart = (algorithm) => {
         setState(algorithm);
     };
+
+    const onResetGrid = (reset) => {
+        setState(reset);
+    };
     return (
         <>
             <div className='nav'>
