@@ -15,7 +15,7 @@ function App() {
     return (
         <>
             <div className='nav'>
-                <Nav algorithmStart={onStart}></Nav>
+                <Nav algorithmStart={onStart} gridReset={onResetGrid}></Nav>
             </div>
             <div className='Main'>
                 <PathfindingVisualiser mode={state}></PathfindingVisualiser>
