@@ -37,7 +37,6 @@ export default class PathfindingVisualiser extends Component {
         if (prevProps.mode !== this.props.mode) {
             this.activateSelectedAlgorithm();
         } else if (prevProps.resetGrid !== this.props.resetGrid) {
-            // console.log("hi");
             this.generateEmptyGrid();
             this.state.resetGrid = false;
         }
