@@ -44,7 +44,6 @@ export default class PathfindingVisualiser extends Component {
 
     render() {
         let grid = this.state.grid;
-
         return (
             <>
                 <div>

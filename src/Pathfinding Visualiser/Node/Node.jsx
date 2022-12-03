@@ -17,7 +17,6 @@ export default class Node extends Component {
             onMouseUp,
         } = this.props;
         let classInfo = "";
-        console.log(weight);
         if (isStart) classInfo = "node-start";
         else if (isFinish) classInfo = "node-finish";
         else if (isWall) classInfo = "node-wall";
