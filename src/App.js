@@ -10,9 +10,14 @@ function App() {
     };
 
     const [reset, setReset] = useState(false);
-    const onResetGrid = (reset) => {
-        setReset(reset);
+    const onResetGrid = () => {
+        setReset(true);
     };
+
+    const gridReset = () => {
+        setReset(false);
+    };
+
     return (
         <>
             <div className='nav'>
@@ -22,6 +27,7 @@ function App() {
                 <PathfindingVisualiser
                     mode={algorithm}
                     resetGrid={reset}
+                    resetGridState={gridReset}
                 ></PathfindingVisualiser>
             </div>
         </>

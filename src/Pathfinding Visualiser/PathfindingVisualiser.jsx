@@ -23,7 +23,6 @@ export default class PathfindingVisualiser extends Component {
         super(props);
         this.state = {
             grid: [],
-            resetGrid: false,
             mousePressed: false,
             selectedNodeIndex: [],
         };
@@ -38,7 +37,7 @@ export default class PathfindingVisualiser extends Component {
             this.activateSelectedAlgorithm();
         } else if (prevProps.resetGrid !== this.props.resetGrid) {
             this.generateEmptyGrid();
-            this.state.resetGrid = false;
+            this.props.resetGridState();
         }
     }
 

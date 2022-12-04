@@ -15,7 +15,10 @@ export default function Nav(props) {
 
     return (
         <Navbar>
-            <ClickableButton onclick='' text='Clear'></ClickableButton>
+            <ClickableButton
+                onclick={props.gridReset}
+                text='Clear'
+            ></ClickableButton>
             <DropDownNavMenu modeChange={updateDropdownState}></DropDownNavMenu>
             <ClickableButton
                 onclick={beginAnimation}
