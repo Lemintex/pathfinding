@@ -188,9 +188,12 @@ export default class PathfindingVisualiser extends Component {
             setTimeout(() => {
                 currentNode = path[i];
                 let { row, col } = currentNode;
-
-                document.getElementById(`node-${row}-${col}`).className =
-                    "node node-path";
+                console.log(currentNode);
+                // document.getElementById(`node-${row}-${col}`).className =
+                //     "node node-path";
+                currentNode.isPath = true;
+                console.log(grid[row][col]);
+                grid[row][col].isPath = true;
                 this.setState({ grid });
             }, ANIMATION_SPEED * animOrder);
         }

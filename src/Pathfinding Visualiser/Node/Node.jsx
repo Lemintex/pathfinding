@@ -20,8 +20,10 @@ export default class Node extends Component {
         if (isStart) classInfo = "node-start";
         else if (isFinish) classInfo = "node-finish";
         else if (isWall) classInfo = "node-wall";
-        else if (isPath) classInfo = "node-path";
-        else classInfo = `node-weight-${Math.floor(weight / 2)}`;
+        else if (isPath) {
+            console.log("test");
+            classInfo = "node-path";
+        } else classInfo = `node-weight-${Math.floor(weight / 2)}`;
 
         return (
             <div
