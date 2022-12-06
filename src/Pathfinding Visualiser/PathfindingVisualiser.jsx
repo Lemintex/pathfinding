@@ -188,7 +188,6 @@ export default class PathfindingVisualiser extends Component {
             setTimeout(() => {
                 currentNode = path[i];
                 let { row, col } = currentNode;
-                console.log(currentNode);
                 // document.getElementById(`node-${row}-${col}`).className =
                 //     "node node-path";
                 currentNode.isPath = true;
