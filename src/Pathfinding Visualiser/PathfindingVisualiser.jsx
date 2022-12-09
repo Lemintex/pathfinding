@@ -180,20 +180,14 @@ export default class PathfindingVisualiser extends Component {
     }
 
     animatePathFound() {
-        let { grid } = this.state;
         let path = this.getPathFound();
         let currentNode;
         let animOrder = 0;
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
-                currentNode = path[i];
-                let { row, col } = currentNode;
-                // document.getElementById(`node-${row}-${col}`).className =
-                //     "node node-path";
-                currentNode.isPath = true;
-                console.log(grid[row][col]);
-                grid[row][col].isPath = true;
-                this.setState({ grid });
+                const { row, col } = path[i];
+                document.getElementById(`node-${row}-${col}`).className =
+                    "node node-path";
             }, ANIMATION_SPEED * animOrder);
         }
     }
