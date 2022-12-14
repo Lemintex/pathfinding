@@ -91,7 +91,6 @@ function addVerticalWall(min, max, x) {
             // grid[i][x].isDoorway = true;
             continue;
         }
-
         // grid[i][x].isWall = true;
         walls.push(grid[i][x]);
     }
