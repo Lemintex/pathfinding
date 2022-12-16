@@ -23,7 +23,7 @@ function App() {
             <div className='nav'>
                 <Nav algorithmStart={onStart} gridReset={onResetGrid}></Nav>
             </div>
-            <div className='Main'>
+            <div className='main'>
                 <PathfindingVisualiser
                     mode={algorithm}
                     resetGrid={reset}
