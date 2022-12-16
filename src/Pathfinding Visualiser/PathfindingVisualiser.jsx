@@ -181,7 +181,6 @@ export default class PathfindingVisualiser extends Component {
 
     animatePathFound() {
         let path = this.getPathFound();
-        let currentNode;
         let animOrder = 0;
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
