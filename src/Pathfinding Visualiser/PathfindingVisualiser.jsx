@@ -56,6 +56,7 @@ export default class PathfindingVisualiser extends Component {
                                         isFinish,
                                         isStart,
                                         isWall,
+                                        isPath,
                                         weight,
                                     } = node;
                                     return (
@@ -66,6 +67,7 @@ export default class PathfindingVisualiser extends Component {
                                             isStart={isStart}
                                             isFinish={isFinish}
                                             isWall={isWall}
+                                            isPath={isPath}
                                             weight={weight}
                                             onMouseDown={() =>
                                                 this.handleMouseDown()
@@ -181,13 +183,15 @@ export default class PathfindingVisualiser extends Component {
 
     animatePathFound() {
         let path = this.getPathFound();
-        let currentNode;
+        let newGrid = this.state.grid;
         let animOrder = 0;
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
                 const { row, col } = path[i];
-                document.getElementById(`node-${row}-${col}`).className =
-                    "node node-path";
+                newGrid[row][col].isPath = true;
+                // document.getElementById(`node-${row}-${col}`).className =
+                //     "node node-path";
+                this.setState({grid: newGrid});
             }, ANIMATION_SPEED * animOrder);
         }
     }
