@@ -53,8 +53,9 @@ export default class PathfindingVisualiser extends Component {
                                     let {
                                         row,
                                         col,
-                                        isFinish,
                                         isStart,
+                                        isFinish,
+                                        isVisited,
                                         isWall,
                                         isPath,
                                         weight,
@@ -66,6 +67,7 @@ export default class PathfindingVisualiser extends Component {
                                             col={col}
                                             isStart={isStart}
                                             isFinish={isFinish}
+                                            isVisited={isVisited}
                                             isWall={isWall}
                                             isPath={isPath}
                                             weight={weight}
