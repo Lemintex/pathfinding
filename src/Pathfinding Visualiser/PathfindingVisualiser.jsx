@@ -185,10 +185,7 @@ export default class PathfindingVisualiser extends Component {
 
     animatePathFound() {
         let path = this.getPathFound();
-<<<<<<< HEAD
         let newGrid = this.state.grid;
-=======
->>>>>>> d8587aee86b9c78f1655ea7a4f5bc04e5d6ff9f7
         let animOrder = 0;
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
@@ -196,7 +193,7 @@ export default class PathfindingVisualiser extends Component {
                 newGrid[row][col].isPath = true;
                 // document.getElementById(`node-${row}-${col}`).className =
                 //     "node node-path";
-                this.setState({grid: newGrid});
+                this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * animOrder);
         }
     }
