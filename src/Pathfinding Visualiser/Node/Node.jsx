@@ -9,6 +9,7 @@ export default class Node extends Component {
             isStart,
             isFinish,
             isWall,
+            isVisited,
             isPath,
             weight,
             previousNode,
@@ -20,6 +21,7 @@ export default class Node extends Component {
         if (isStart) classInfo = "node-start";
         else if (isFinish) classInfo = "node-finish";
         else if (isWall) classInfo = "node-wall";
+        else if (isVisited) classInfo = "node-visited";
         else if (isPath) classInfo = "node-path";
         else classInfo = `node-weight-${Math.floor(weight / 2)}`;
 

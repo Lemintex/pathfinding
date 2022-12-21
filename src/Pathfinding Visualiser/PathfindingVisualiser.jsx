@@ -199,7 +199,6 @@ export default class PathfindingVisualiser extends Component {
     }
 
     animateAlgorithm(visitedNodesInOrder) {
-        // let { grid } = this.state;
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
                 setTimeout(() => {
@@ -209,10 +208,17 @@ export default class PathfindingVisualiser extends Component {
                 let node = visitedNodesInOrder[i];
                 if (node.isStart || node.isFinish) continue;
                 setTimeout(() => {
-                    document.getElementById(
-                        `node-${node.row}-${node.col}`
-                    ).className = "node node-visited";
-                    // this.setState({ grid });
+                    let newGrid = this.state.grid;
+                    const { row, col } = node;
+                    // document.getElementById(
+                    //     `node-${node.row}-${node.col}`
+                    // ).className = "node node-visited";
+                    node.isVisited = true;
+                    newGrid[row][col] = node;
+                    newGrid[row][col].isVisited = true;
+                    // console.log(newGrid);
+                    // newGrid[row][col].isVisited = true;
+                    this.setState({ grid: newGrid });
                 }, ANIMATION_SPEED * i);
             }
         }
