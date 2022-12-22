@@ -198,30 +198,26 @@ export default class PathfindingVisualiser extends Component {
         }
     }
 
+    // due to batching, I am unsure if I can get this working
     animateAlgorithm(visitedNodesInOrder) {
-        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-            if (i === visitedNodesInOrder.length) {
-                setTimeout(() => {
-                    this.animatePathFound();
-                }, ANIMATION_SPEED * i);
-            } else {
+        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+            setTimeout(() => {
                 let node = visitedNodesInOrder[i];
-                if (node.isStart || node.isFinish) continue;
-                setTimeout(() => {
-                    let newGrid = this.state.grid;
-                    const { row, col } = node;
-                    // document.getElementById(
-                    //     `node-${node.row}-${node.col}`
-                    // ).className = "node node-visited";
-                    node.isVisited = true;
-                    newGrid[row][col] = node;
-                    newGrid[row][col].isVisited = true;
-                    // console.log(newGrid);
-                    // newGrid[row][col].isVisited = true;
-                    this.setState({ grid: newGrid });
-                }, ANIMATION_SPEED * i);
-            }
+                console.log(node);
+//            if (node.isStart || node.isFinish) continue;
+
+                let newGrid = this.state.grid;
+                node.isVisited = true;
+                newGrid[node.row][node.col] = node;
+
+                this.a(newGrid);
+            }, ANIMATION_SPEED * i);
         }
+    }
+
+    a(newGrid){
+        this.setState({ grid: newGrid });
+        
     }
 
     visualiseDepthFirst() {
