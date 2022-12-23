@@ -203,21 +203,11 @@ export default class PathfindingVisualiser extends Component {
         for (let i = 0; i < visitedNodesInOrder.length; i++) {
             setTimeout(() => {
                 let node = visitedNodesInOrder[i];
-                console.log(node);
-//            if (node.isStart || node.isFinish) continue;
-
-                let newGrid = this.state.grid;
-                node.isVisited = true;
-                newGrid[node.row][node.col] = node;
-
-                this.a(newGrid);
+                const { row, col } = node;
+                document.getElementById(`node-${row}-${col}`).className =
+                    "node node-visited";
             }, ANIMATION_SPEED * i);
         }
-    }
-
-    a(newGrid){
-        this.setState({ grid: newGrid });
-        
     }
 
     visualiseDepthFirst() {
