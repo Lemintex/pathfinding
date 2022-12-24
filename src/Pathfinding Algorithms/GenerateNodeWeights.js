@@ -1,7 +1,7 @@
 let nodesToBeVisited = [];
 export function generateNodeWeights(grid, startNode) {
     startNode.weight = 0;
-    startNode.isVisited = true;
+    startNode.hasBeenVisited = true;
     nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
         let currentNode = nodesToBeVisited.shift();
@@ -36,8 +36,8 @@ export function generateNodeWeights(grid, startNode) {
 }
 
 function visitNode(node, weight) {
-    if (node.isVisited || node.isWall) return;
-    node.isVisited = true;
+    if (node.hasBeenVisited || node.isWall) return;
+    node.hasBeenVisited = true;
     node.weight = weight;
     nodesToBeVisited.push(node);
 }

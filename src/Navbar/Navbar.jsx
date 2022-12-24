@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import "./Navbar.css";
 export default function Nav(props) {
-    const [state, setState] = useState();
+    const [state, setState] = useState("DepthFirstSearch");
 
     const updateDropdownState = (stateArg) => {
         setState(stateArg);

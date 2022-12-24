@@ -1,7 +1,7 @@
 export function beginBreadthFirstSearch(grid, startNode) {
     var nodesToBeVisited = [];
     let nodesInOrder = [];
-    startNode.isVisited = true;
+    startNode.hasBeenVisited = true;
     nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
         let currentNode = nodesToBeVisited.shift();
@@ -33,9 +33,9 @@ export function beginBreadthFirstSearch(grid, startNode) {
     }
 
     function visitNode(previousNode, node) {
-        if (node.isVisited || node.isWall) return;
+        if (node.hasBeenVisited || node.isWall) return;
         node.previousNode = previousNode;
-        node.isVisited = true;
+        node.hasBeenVisited = true;
         nodesToBeVisited.push(node);
     }
 }

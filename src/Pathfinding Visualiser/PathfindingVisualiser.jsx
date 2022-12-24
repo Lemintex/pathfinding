@@ -33,9 +33,18 @@ export default class PathfindingVisualiser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.mode !== this.props.mode) {
+        // if (prevProps.mode !== this.props.mode) {
+        if (
+            this.props.algorithmStart &&
+            prevProps.algorithmStart !== this.props.algorithmStart
+        ) {
             this.activateSelectedAlgorithm();
-        } else if (prevProps.resetGrid !== this.props.resetGrid) {
+            this.props.algorithmStartState();
+        }
+        if (
+            this.props.resetGrid &&
+            prevProps.resetGrid !== this.props.resetGrid
+        ) {
             this.generateEmptyGrid();
             this.props.resetGridState();
         }
@@ -136,7 +145,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     activateSelectedAlgorithm() {
-        switch (this.props.mode) {
+        switch (this.props.algorithm) {
             case "DepthFirstSearch":
                 this.visualiseDepthFirst();
                 break;
@@ -190,24 +199,37 @@ export default class PathfindingVisualiser extends Component {
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
                 const { row, col } = path[i];
-                document.getElementById(`node-${row}-${col}`).className =
-                    "node node-path";
-                // newGrid[row][col].isPath = true;
-                // this.setState({ grid: newGrid });
+                // document.getElementById(`node-${row}-${col}`).className =
+                //     "node node-path";
+                newGrid[row][col].isPath = true;
+                this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * animOrder);
         }
     }
 
     // due to batching, I am unsure if I can get this working
     animateAlgorithm(visitedNodesInOrder) {
-        for (let i = 0; i < visitedNodesInOrder.length; i++) {
+        let newGrid = this.state.grid;
+        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+            if (i === visitedNodesInOrder.length) {
+                setTimeout(() => {
+                    this.animatePathFound();
+                }, ANIMATION_SPEED * i);
+                continue;
+            }
+            let node = visitedNodesInOrder[i];
+            if (node.isStart || node.isFinish) continue;
             setTimeout(() => {
-                let node = visitedNodesInOrder[i];
                 const { row, col } = node;
-                document.getElementById(`node-${row}-${col}`).className =
-                    "node node-visited";
+                // document.getElementById(`node-${row}-${col}`).className =
+                //     "node node-visited";
+                newGrid[row][col].isVisited = true;
+                this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * i);
         }
+        // setTimeout(() => {
+        //     this.animatePathFound();
+        // }, ANIMATION_SPEED * visitedNodesInOrder.length);
     }
 
     visualiseDepthFirst() {

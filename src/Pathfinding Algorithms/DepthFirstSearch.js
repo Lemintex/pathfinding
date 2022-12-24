@@ -5,7 +5,7 @@ export function beginDepthFirstSearch(grid, startNode) {
     while (nodesToBeVisited.length > 0) {
         let currentNode = nodesToBeVisited.pop();
         nodesInVisitedOrder.push(currentNode);
-        currentNode.isVisited = true;
+        currentNode.hasBeenVisited = true;
         if (currentNode.isFinish) {
             console.log(currentNode);
             return nodesInVisitedOrder;
@@ -31,7 +31,7 @@ export function beginDepthFirstSearch(grid, startNode) {
 }
 
 function visitNode(previousNode, node) {
-    if (node.isVisited || node.isWall) return;
+    if (node.hasBeenVisited || node.isWall) return;
     node.previousNode = previousNode;
     nodesToBeVisited.push(node);
 }

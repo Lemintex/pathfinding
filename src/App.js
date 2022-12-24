@@ -4,9 +4,14 @@ import PathfindingVisualiser from "./Pathfinding Visualiser/PathfindingVisualise
 import Nav from "./Navbar/Navbar";
 
 function App() {
+    const [modeActivate, setModeActivate] = useState(false);
+    const modeActivateReset = () => {
+        setModeActivate(false);
+    };
     const [algorithm, setAlgorithm] = useState("DepthFirst");
     const onStart = (algorithm) => {
         setAlgorithm(algorithm);
+        setModeActivate(true);
     };
 
     const [reset, setReset] = useState(false);
@@ -25,7 +30,9 @@ function App() {
             </div>
             <div className='main'>
                 <PathfindingVisualiser
-                    mode={algorithm}
+                    algorithm={algorithm}
+                    algorithmStart={modeActivate}
+                    algorithmStartState={modeActivateReset}
                     resetGrid={reset}
                     resetGridState={gridReset}
                 ></PathfindingVisualiser>
