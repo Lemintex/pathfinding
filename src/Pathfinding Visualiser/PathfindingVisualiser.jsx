@@ -10,6 +10,12 @@ import { weightedAStar } from "../Pathfinding Algorithms/WeightedAStar";
 import { generateNodeWeights } from "../Pathfinding Algorithms/GenerateNodeWeights";
 import "./PathfindingVisualiser.css";
 
+const MOUSE_MODE = {
+    START: 0,
+    FINISH: 1,
+    WALL: 2,
+};
+
 const GRID_LENGTH = 39;
 const GRID_HEIGHT = 25;
 const START_NODE_ROW = 5;
@@ -33,7 +39,6 @@ export default class PathfindingVisualiser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // if (prevProps.mode !== this.props.mode) {
         if (
             this.props.algorithmStart &&
             prevProps.algorithmStart !== this.props.algorithmStart
