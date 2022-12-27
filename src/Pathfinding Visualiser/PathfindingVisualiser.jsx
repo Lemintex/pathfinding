@@ -30,6 +30,7 @@ export default class PathfindingVisualiser extends Component {
         this.state = {
             grid: [],
             mousePressed: false,
+            mousePressedMode: -1,
             selectedNodeIndex: [],
         };
     }
@@ -109,7 +110,25 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ mousePressed: true });
         let index = this.state.selectedNodeIndex;
         let newGrid = this.state.grid;
-        newGrid[index[0]][index[1]].isWall = true;
+        let node = newGrid[index[0]][index[1]];
+        if (node.isStart) {
+            this.setState({ mousePressedMode: MOUSE_MODE.START });
+        } else if (node.isFinish) {
+            this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
+        } else {
+            this.setState({ mousePressedMode: MOUSE_MODE.WALL });
+        }
+        // TODO: add functionality
+        switch (this.state.mousePressedMode) {
+            case MOUSE_MODE.WALL:
+                node.isWall = true;
+                break;
+
+            default:
+                break;
+        }
+        // this.setState({ grid: newGrid });
+        // newGrid[index[0]][index[1]].isWall = true;
         this.setState({ grid: newGrid });
     }
 
@@ -117,6 +136,20 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ selectedNodeIndex: [row, col] });
         if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
+        let node = newGrid[row][col];
+        switch (this.state.mousePressedMode) {
+            case MOUSE_MODE.START:
+                break;
+
+            case MOUSE_MODE.FINISH:
+                break;
+
+            case MOUSE_MODE.WALL:
+                break;
+
+            default:
+                break;
+        }
         newGrid[row][col].isWall = true;
         this.setState({ grid: newGrid });
     }
