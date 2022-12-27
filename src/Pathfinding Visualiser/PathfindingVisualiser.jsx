@@ -128,8 +128,6 @@ export default class PathfindingVisualiser extends Component {
             default:
                 break;
         }
-        // this.setState({ grid: newGrid });
-        // newGrid[index[0]][index[1]].isWall = true;
         this.setState({ grid: newGrid });
     }
 
@@ -155,7 +153,6 @@ export default class PathfindingVisualiser extends Component {
             default:
                 break;
         }
-        // newGrid[row][col].isWall = true;
         this.setState({ grid: newGrid });
     }
 
@@ -242,8 +239,6 @@ export default class PathfindingVisualiser extends Component {
         for (let i = path.length - 1; i >= 0; i--, animOrder++) {
             setTimeout(() => {
                 const { row, col } = path[i];
-                // document.getElementById(`node-${row}-${col}`).className =
-                //     "node node-path";
                 newGrid[row][col].isPath = true;
                 this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * animOrder);
@@ -264,15 +259,10 @@ export default class PathfindingVisualiser extends Component {
             if (node.isStart || node.isFinish) continue;
             setTimeout(() => {
                 const { row, col } = node;
-                // document.getElementById(`node-${row}-${col}`).className =
-                //     "node node-visited";
                 newGrid[row][col].isVisited = true;
                 this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * i);
         }
-        // setTimeout(() => {
-        //     this.animatePathFound();
-        // }, ANIMATION_SPEED * visitedNodesInOrder.length);
     }
 
     visualiseDepthFirst() {
@@ -299,10 +289,6 @@ export default class PathfindingVisualiser extends Component {
                     let node = wallSegment[j];
                     if (node.isStart || node.isFinish) continue;
                     node.isWall = true;
-
-                    document.getElementById(
-                        `node-${node.row}-${node.col}`
-                    ).className = "node node-wall";
                 }
                 this.setState({ grid });
             }, ANIMATION_SPEED * i);
