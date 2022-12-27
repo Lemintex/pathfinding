@@ -110,6 +110,7 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ mousePressed: true });
         let index = this.state.selectedNodeIndex;
         let newGrid = this.state.grid;
+        console.log(index);
         let node = newGrid[index[0]][index[1]];
         if (node.isStart) {
             this.setState({ mousePressedMode: MOUSE_MODE.START });
@@ -133,12 +134,16 @@ export default class PathfindingVisualiser extends Component {
     }
 
     handleMouseEnter(row, col) {
+        let prev = this.state.selectedNodeIndex;
         this.setState({ selectedNodeIndex: [row, col] });
         if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
             case MOUSE_MODE.START:
+                console.log("S");
+                newGrid[prev[0]][prev[1]].isStart = false;
+                node.isStart = true;
                 break;
 
             case MOUSE_MODE.FINISH:
@@ -150,7 +155,7 @@ export default class PathfindingVisualiser extends Component {
             default:
                 break;
         }
-        newGrid[row][col].isWall = true;
+        // newGrid[row][col].isWall = true;
         this.setState({ grid: newGrid });
     }
 
