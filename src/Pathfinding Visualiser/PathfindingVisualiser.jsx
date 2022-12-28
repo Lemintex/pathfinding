@@ -18,10 +18,10 @@ const MOUSE_MODE = {
 
 const GRID_LENGTH = 39;
 const GRID_HEIGHT = 25;
-const START_NODE_ROW = 5;
-const START_NODE_COL = 5;
-const FINISH_NODE_ROW = 15;
-const FINISH_NODE_COL = 35;
+// const START_NODE_ROW = 5;
+// const START_NODE_COL = 5;
+// const FINISH_NODE_ROW = 15;
+// const FINISH_NODE_COL = 35;
 let ANIMATION_SPEED = 20;
 
 export default class PathfindingVisualiser extends Component {
@@ -32,6 +32,14 @@ export default class PathfindingVisualiser extends Component {
             mousePressed: false,
             mousePressedMode: -1,
             selectedNodeIndex: [],
+            startPos: {
+                row: 5,
+                col: 5,
+            },
+            finishPos: {
+                row: 15,
+                col: 35,
+            },
         };
     }
 
@@ -87,7 +95,7 @@ export default class PathfindingVisualiser extends Component {
                                             isPath={isPath}
                                             weight={weight}
                                             onMouseDown={() =>
-                                                this.handleMouseDown()
+                                                this.handleMouseDown(row, col)
                                             }
                                             onMouseEnter={() =>
                                                 this.handleMouseEnter(row, col)
@@ -106,12 +114,10 @@ export default class PathfindingVisualiser extends Component {
         );
     }
 
-    handleMouseDown() {
+    handleMouseDown(row, col) {
         this.setState({ mousePressed: true });
-        let index = this.state.selectedNodeIndex;
         let newGrid = this.state.grid;
-        console.log(index);
-        let node = newGrid[index[0]][index[1]];
+        let node = newGrid[row][col];
         if (node.isStart) {
             this.setState({ mousePressedMode: MOUSE_MODE.START });
         } else if (node.isFinish) {
@@ -132,22 +138,26 @@ export default class PathfindingVisualiser extends Component {
     }
 
     handleMouseEnter(row, col) {
-        let prev = this.state.selectedNodeIndex;
-        this.setState({ selectedNodeIndex: [row, col] });
         if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
             case MOUSE_MODE.START:
-                console.log("S");
-                newGrid[prev[0]][prev[1]].isStart = false;
+                let { startPos } = this.state;
+                newGrid[startPos.row][startPos.col].isStart = false;
                 node.isStart = true;
+                this.setState({ startPos: { row: row, col: col } });
                 break;
 
             case MOUSE_MODE.FINISH:
+                let { finishPos } = this.state;
+                newGrid[finishPos.row][finishPos.col].isFinish = false;
+                node.isFinish = true;
+                this.setState({ finishPos: { row: row, col: col } });
                 break;
 
             case MOUSE_MODE.WALL:
+                node.isWall = true;
                 break;
 
             default:
@@ -158,18 +168,20 @@ export default class PathfindingVisualiser extends Component {
 
     handleMouseUp() {
         this.setState({ mousePressed: false });
+        this.setState({ mousePressedMode: -1 });
     }
 
     generateEmptyGrid() {
         let grid = [];
+        let { startPos, finishPos } = this.state;
         for (let i = 0; i < GRID_HEIGHT; i++) {
             var currentRow = [];
             for (let j = 0; j < GRID_LENGTH; j++) {
                 let nodeInfo = {
                     row: i,
                     col: j,
-                    isStart: i === START_NODE_ROW && j === START_NODE_COL,
-                    isFinish: i === FINISH_NODE_ROW && j === FINISH_NODE_COL,
+                    isStart: i === startPos.row && j === startPos.col,
+                    isFinish: i === finishPos.row && j === finishPos.col,
                     isWall: false,
                     isVisited: false,
                     isPath: false,
@@ -222,7 +234,8 @@ export default class PathfindingVisualiser extends Component {
     getPathFound() {
         let path = [];
         let { grid } = this.state;
-        let node = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        let { finishPos } = this.state;
+        let node = grid[finishPos.row][finishPos.col];
         if (node.previousNode === null) return null;
         node = node.previousNode;
         while (node.previousNode !== null && !node.isStart) {
@@ -267,14 +280,16 @@ export default class PathfindingVisualiser extends Component {
 
     visualiseDepthFirst() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
+        let { row, col } = this.state.startPos;
+        let start = grid[row][col];
         let visitedNodesInOrder = beginDepthFirstSearch(grid, start);
         this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseBreadthFirst() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
+        let { row, col } = this.state.startPos;
+        let start = grid[row][col];
         let visitedNodesInOrder = beginBreadthFirstSearch(grid, start);
         this.animateAlgorithm(visitedNodesInOrder);
     }
@@ -297,30 +312,36 @@ export default class PathfindingVisualiser extends Component {
 
     generateNodeWeights() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
+        let { row, col } = this.state.startPos;
+        let start = grid[row][col];
         grid = generateNodeWeights(grid, start);
         this.setState({ grid });
     }
 
     visualiseWeightedDijkstras() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
+        let { row, col } = this.state.startPos;
+        let start = grid[row][col];
         let visitedNodesInOrder = weightedDijkstras(grid, start);
         this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseUnweightedAStar() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
-        let finish = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        let { startPos } = this.state;
+        let start = grid[startPos.row][startPos.col];
+        let { finishPos } = this.state;
+        let finish = grid[finishPos.row][finishPos.col];
         let visitedNodesInOrder = unweightedAStar(grid, start, finish);
         this.animateAlgorithm(visitedNodesInOrder);
     }
 
     visualiseWeightedAStar() {
         let { grid } = this.state;
-        let start = grid[START_NODE_ROW][START_NODE_COL];
-        let finish = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        let { startPos } = this.state;
+        let start = grid[startPos.row][startPos.col];
+        let { finishPos } = this.state;
+        let finish = grid[finishPos.row][finishPos.col];
         let visitedNodesInOrder = weightedAStar(grid, start, finish);
         this.animateAlgorithm(visitedNodesInOrder);
     }
