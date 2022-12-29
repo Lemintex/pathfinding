@@ -1,6 +1,6 @@
 :root {
     --bg: #303121;
-    --nav-size: 60px;
+    --nav-size: 75px;
 }
 
 ul {
@@ -8,9 +8,8 @@ ul {
     margin: 0;
     padding: 0;
 }
-
 .navbar {
-    height: 75px;
+    height: var(--nav-size);
     background-color: var(--bg);
     padding: 0 1rem;
 }
@@ -19,6 +18,7 @@ ul {
     max-width: 100%;
     height: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -29,10 +29,15 @@ ul {
     justify-content: center;
 }
 
-.image-button {
-    width: calc(var(--nav-size) * 0.6);
+button {
+    width: 100px;
+    height: calc(var(--nav-size) * 0.6);
+    align-items: center;
+    justify-content: center;
 }
 
+.clear-grid {
+}
 .algorithm-select {
     align-self: center;
 }
