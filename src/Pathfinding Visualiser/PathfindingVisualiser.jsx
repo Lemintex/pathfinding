@@ -31,6 +31,7 @@ export default class PathfindingVisualiser extends Component {
             grid: [],
             mousePressed: false,
             mousePressedMode: -1,
+            algorithmInProgress: false,
             selectedNodeIndex: [],
             startPos: {
                 row: 5,
@@ -116,6 +117,7 @@ export default class PathfindingVisualiser extends Component {
 
     handleMouseDown(row, col) {
         this.setState({ mousePressed: true });
+        if (this.state.algorithmInProgress) return;
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         if (node.isStart) {
@@ -256,10 +258,11 @@ export default class PathfindingVisualiser extends Component {
                 this.setState({ grid: newGrid });
             }, ANIMATION_SPEED * animOrder);
         }
+        this.setState({ algorithmInProgress: false });
     }
 
-    // due to batching, I am unsure if I can get this working
     animateAlgorithm(visitedNodesInOrder) {
+        this.setState({ algorithmInProgress: true });
         let newGrid = this.state.grid;
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
