@@ -2,12 +2,11 @@ let nodesToBeVisited = [];
 let visitedNodesInOrder = [];
 let grid;
 let averageWeight;
-// worth noting this is essentially BFS as all nodes are weighted equally
+
 export function weightedAStar(g, startNode, finishNode) {
     grid = g;
     nodesToBeVisited = getAllNodesFromGrid();
     startNode.distance = 0;
-    console.log(nodesToBeVisited);
     while (nodesToBeVisited.length > 0) {
         updateHeap();
         let nextNode = nodesToBeVisited.shift();
@@ -27,10 +26,12 @@ function updateHeap() {
 function updateNeighboursOfNode(node, finishNode) {
     let neighbours = getNeighboursOfNode(node);
     for (let n of neighbours) {
+        if (n.distance !== Infinity) continue;
         let heuristic =
             Math.abs(n.row - finishNode.row) + Math.abs(n.col - finishNode.col);
         heuristic *= averageWeight;
         n.distance = node.distance + heuristic;
+        n.previousNode = node;
     }
 }
 

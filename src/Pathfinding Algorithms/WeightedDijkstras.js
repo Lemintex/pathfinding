@@ -1,12 +1,11 @@
 let nodesToBeVisited = [];
 let visitedNodesInOrder = [];
 let grid;
-// worth noting this is essentially BFS as all nodes are weighted equally
+
 export function weightedDijkstras(g, startNode) {
     grid = g;
     nodesToBeVisited = getAllNodesFromGrid();
     startNode.distance = 0;
-    console.log(nodesToBeVisited);
     while (nodesToBeVisited.length > 0) {
         updateHeap();
         let nextNode = nodesToBeVisited.shift();
@@ -26,7 +25,10 @@ function updateHeap() {
 function updateNeighboursOfNode(node) {
     let neighbours = getNeighboursOfNode(node);
     for (let n of neighbours) {
+        if (n.distance !== Infinity) continue;
+
         n.distance = node.distance + n.weight;
+        n.previousNode = node;
     }
 }
 
