@@ -6,10 +6,7 @@ export function beginDepthFirstSearch(grid, startNode) {
         let currentNode = nodesToBeVisited.pop();
         nodesInVisitedOrder.push(currentNode);
         currentNode.hasBeenVisited = true;
-        if (currentNode.isFinish) {
-            console.log(currentNode);
-            return nodesInVisitedOrder;
-        }
+        if (currentNode.isFinish) return nodesInVisitedOrder;
         let { row, col } = currentNode;
         if (col > 0) {
             let node = grid[row][col - 1];
