@@ -1,41 +1,36 @@
+let grid;
 let nodesToBeVisited = [];
-export function generateNodeWeights(grid, startNode) {
+
+export function generateNodeWeights(g, startNode) {
+    grid = g;
     startNode.weight = 0;
     startNode.hasBeenVisited = true;
     nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
         let currentNode = nodesToBeVisited.shift();
 
-        let { row, col } = currentNode;
-        grid[row][col] = currentNode;
-        if (row > 0) {
-            let node = grid[row - 1][col];
-            let weight = randomNumber(currentNode.weight);
-            visitNode(node, weight);
-        }
-
-        if (col < grid[0].length - 1) {
-            let node = grid[row][col + 1];
-            let weight = randomNumber(currentNode.weight);
-            visitNode(node, weight);
-        }
-
-        if (row < grid.length - 1) {
-            let node = grid[row + 1][col];
-            let weight = randomNumber(currentNode.weight);
-            visitNode(node, weight);
-        }
-
-        if (col > 0) {
-            let node = grid[row][col - 1];
-            let weight = randomNumber(currentNode.weight);
-            visitNode(node, weight);
+        let neighbours = getNeighboursOfNode(currentNode);
+        for (let n of neighbours) {
+            visitNode(n, currentNode.weight);
         }
     }
     return grid;
 }
 
-function visitNode(node, weight) {
+// returns nodes adjacent to the argument node
+function getNeighboursOfNode(node) {
+    let neighbours = [];
+    let { row, col } = node;
+    if (row > 0) neighbours.push(grid[row - 1][col]);
+    if (col > 0) neighbours.push(grid[row][col - 1]);
+    if (row < grid.length - 1) neighbours.push(grid[row + 1][col]);
+    if (col < grid[0].length - 1) neighbours.push(grid[row][col + 1]);
+    return neighbours;
+}
+
+// visit the node
+function visitNode(node, currentNodeWeight) {
+    let weight = randomNumber(currentNodeWeight);
     if (node.hasBeenVisited || node.isWall) return;
     node.hasBeenVisited = true;
     node.weight = weight;

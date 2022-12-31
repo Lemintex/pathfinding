@@ -1,32 +1,36 @@
+let grid;
 var nodesToBeVisited = [];
-export function beginDepthFirstSearch(grid, startNode) {
+
+export function beginDepthFirstSearch(g, startNode) {
+    grid = g;
     let nodesInVisitedOrder = [];
+    startNode.hasBeenVisited = true;
     nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
         let currentNode = nodesToBeVisited.pop();
         nodesInVisitedOrder.push(currentNode);
         currentNode.hasBeenVisited = true;
         if (currentNode.isFinish) return nodesInVisitedOrder;
-        let { row, col } = currentNode;
-        if (col > 0) {
-            let node = grid[row][col - 1];
-            visitNode(currentNode, node);
-        }
-        if (row < grid.length - 1) {
-            let node = grid[row + 1][col];
-            visitNode(currentNode, node);
-        }
-        if (col < grid[0].length - 1) {
-            let node = grid[row][col + 1];
-            visitNode(currentNode, node);
-        }
-        if (row > 0) {
-            let node = grid[row - 1][col];
-            visitNode(currentNode, node);
+        let neighbours = getNeighboursOfNode(currentNode);
+        for (let n of neighbours) {
+            visitNode(currentNode, n);
         }
     }
+    return nodesInVisitedOrder;
 }
 
+// returns nodes adjacent to the argument node
+function getNeighboursOfNode(node) {
+    let neighbours = [];
+    let { row, col } = node;
+    if (row > 0) neighbours.push(grid[row - 1][col]);
+    if (col > 0) neighbours.push(grid[row][col - 1]);
+    if (row < grid.length - 1) neighbours.push(grid[row + 1][col]);
+    if (col < grid[0].length - 1) neighbours.push(grid[row][col + 1]);
+    return neighbours;
+}
+
+// visit the node
 function visitNode(previousNode, node) {
     if (node.hasBeenVisited || node.isWall) return;
     node.previousNode = previousNode;

@@ -1,10 +1,10 @@
 let nodesToBeVisited = [];
-let visitedNodesInOrder = [];
 let grid;
 
 export function unweightedAStar(g, startNode, finishNode) {
     grid = g;
-    nodesToBeVisited = getAllNodesFromGrid();
+    let visitedNodesInOrder = [];
+    nodesToBeVisited = []; //getAllNodesFromGrid();
     startNode.distance = 0;
     while (nodesToBeVisited.length > 0) {
         updateHeap();
@@ -25,7 +25,8 @@ function updateHeap() {
 function updateNeighboursOfNode(node, finishNode) {
     let neighbours = getNeighboursOfNode(node);
     for (let n of neighbours) {
-        if (n.distance !== Infinity) continue;
+        if (n.distance !== Infinity || n.isWall) continue;
+        nodesToBeVisited.push(n);
         let heuristic =
             Math.abs(n.row - finishNode.row) + Math.abs(n.col - finishNode.col);
         n.distance = node.distance + heuristic;
@@ -33,6 +34,7 @@ function updateNeighboursOfNode(node, finishNode) {
     }
 }
 
+// returns nodes adjacent to the argument node
 function getNeighboursOfNode(node) {
     let neighbours = [];
     let { row, col } = node;
@@ -41,14 +43,4 @@ function getNeighboursOfNode(node) {
     if (row < grid.length - 1) neighbours.push(grid[row + 1][col]);
     if (col < grid[0].length - 1) neighbours.push(grid[row][col + 1]);
     return neighbours;
-}
-
-function getAllNodesFromGrid() {
-    let nodes = [];
-    for (let row of grid) {
-        for (let node of row) {
-            nodes.push(node);
-        }
-    }
-    return nodes;
 }
