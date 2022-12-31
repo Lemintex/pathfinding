@@ -235,8 +235,7 @@ export default class PathfindingVisualiser extends Component {
 
     getPathFound() {
         let path = [];
-        let { grid } = this.state;
-        let { finishPos } = this.state;
+        let { grid, finishPos } = this.state;
         let node = grid[finishPos.row][finishPos.col];
         if (node.previousNode === null) return [];
         node = node.previousNode;
