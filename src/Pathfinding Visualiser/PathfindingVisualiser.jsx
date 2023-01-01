@@ -68,11 +68,11 @@ export default class PathfindingVisualiser extends Component {
     render() {
         let grid = this.state.grid;
         return (
-            <>
-                <div>
+            <div>
+                <div className='grid'>
                     {grid.map((row, rowIdx) => {
                         return (
-                            <div key={rowIdx}>
+                            <div className='row' key={rowIdx}>
                                 {row.map((node, nodeIdx) => {
                                     let {
                                         row,
@@ -111,7 +111,7 @@ export default class PathfindingVisualiser extends Component {
                         );
                     })}
                 </div>
-            </>
+            </div>
         );
     }
 

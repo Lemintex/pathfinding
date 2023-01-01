@@ -3,6 +3,7 @@
     height: 42px;
     outline: 1px solid black;
     vertical-align: top;
+    /* justify-content: center; */
     display: inline-block;
 }
 
