@@ -66,7 +66,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     render() {
-        let grid = this.state.grid;
+        let { grid, startPos, finishPos } = this.state;
         return (
             <div>
                 <div className='grid'>
@@ -77,8 +77,8 @@ export default class PathfindingVisualiser extends Component {
                                     let {
                                         row,
                                         col,
-                                        isStart,
-                                        isFinish,
+                                        // isStart,
+                                        // isFinish,
                                         isVisited,
                                         isWall,
                                         isPath,
@@ -89,8 +89,14 @@ export default class PathfindingVisualiser extends Component {
                                             key={nodeIdx}
                                             row={row}
                                             col={col}
-                                            isStart={isStart}
-                                            isFinish={isFinish}
+                                            isStart={
+                                                startPos.row === row &&
+                                                startPos.col === col
+                                            }
+                                            isFinish={
+                                                finishPos.row === row &&
+                                                finishPos.col === col
+                                            }
                                             isVisited={isVisited}
                                             isWall={isWall}
                                             isPath={isPath}
@@ -145,16 +151,16 @@ export default class PathfindingVisualiser extends Component {
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
             case MOUSE_MODE.START:
-                let { startPos } = this.state;
-                newGrid[startPos.row][startPos.col].isStart = false;
-                node.isStart = true;
+                // let { startPos } = this.state;
+                // newGrid[startPos.row][startPos.col].isStart = false                                                ;
                 this.setState({ startPos: { row: row, col: col } });
+                // node.isStart = true;
                 break;
 
             case MOUSE_MODE.FINISH:
-                let { finishPos } = this.state;
-                newGrid[finishPos.row][finishPos.col].isFinish = false;
-                node.isFinish = true;
+                // let { finishPos } = this.state;
+                // newGrid[finishPos.row][finishPos.col].isFinish = false;
+                // node.isFinish = true;
                 this.setState({ finishPos: { row: row, col: col } });
                 break;
 
