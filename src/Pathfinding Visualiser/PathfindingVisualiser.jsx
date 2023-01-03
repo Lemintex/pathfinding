@@ -151,16 +151,10 @@ export default class PathfindingVisualiser extends Component {
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
             case MOUSE_MODE.START:
-                // let { startPos } = this.state;
-                // newGrid[startPos.row][startPos.col].isStart = false                                                ;
                 this.setState({ startPos: { row: row, col: col } });
-                // node.isStart = true;
                 break;
 
             case MOUSE_MODE.FINISH:
-                // let { finishPos } = this.state;
-                // newGrid[finishPos.row][finishPos.col].isFinish = false;
-                // node.isFinish = true;
                 this.setState({ finishPos: { row: row, col: col } });
                 break;
 
