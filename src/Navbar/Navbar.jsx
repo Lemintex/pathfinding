@@ -16,13 +16,13 @@ export default function Nav(props) {
     return (
         <Navbar>
             <ClickableButton
-                className='clear-grid'
+                id='clear-grid'
                 onclick={props.gridReset}
                 text='Clear'
             ></ClickableButton>
             <DropDownNavMenu modeChange={updateDropdownState}></DropDownNavMenu>
             <ClickableButton
-                className='begin-animation'
+                id='begin-animation'
                 onclick={beginAnimation}
                 text='Animate'
             ></ClickableButton>
@@ -89,7 +89,11 @@ function DropDownNavMenu(props) {
 
 function ClickableButton(props) {
     return (
-        <button className={props.className} onClick={props.onclick}>
+        <button
+            // className={props.className}
+            id={props.id}
+            onClick={props.onclick}
+        >
             {props.text}
         </button>
     );

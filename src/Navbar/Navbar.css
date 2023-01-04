@@ -31,13 +31,20 @@ ul {
 
 button {
     width: 100px;
-    height: calc(var(--nav-size) * 0.6);
     align-items: center;
     justify-content: center;
 }
 
-.clear-grid {
+#clear-grid {
+    height: calc(var(--nav-size) * 0.6);
+    width: calc(var(--nav-size) * 0.6);
 }
+
+#begin-animation {
+    height: calc(var(--nav-size) * 0.6);
+    width: 120px;
+}
+
 .algorithm-select {
     align-self: center;
 }
