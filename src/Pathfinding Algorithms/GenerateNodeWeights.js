@@ -37,6 +37,7 @@ function visitNode(node, currentNodeWeight) {
     nodesToBeVisited.push(node);
 }
 
+// generate a number 0-1 from the argument number
 function randomNumber(number) {
     let difference = Math.round(Math.random() * 2) - 1;
     if (number + difference <= 0) return number;
