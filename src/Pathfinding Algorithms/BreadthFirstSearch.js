@@ -1,6 +1,7 @@
 let grid;
 let nodesToBeVisited = [];
 
+// begins BFS
 export function beginBreadthFirstSearch(g, startNode) {
     grid = g;
     let nodesInVisitedOrder = [];
