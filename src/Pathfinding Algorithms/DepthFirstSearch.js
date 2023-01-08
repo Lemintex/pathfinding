@@ -1,6 +1,7 @@
 let grid;
 var nodesToBeVisited = [];
 
+// BEGINS DFS
 export function beginDepthFirstSearch(g, startNode) {
     grid = g;
     let nodesInVisitedOrder = [];
