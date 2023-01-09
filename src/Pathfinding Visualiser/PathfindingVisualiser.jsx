@@ -77,8 +77,6 @@ export default class PathfindingVisualiser extends Component {
                                     let {
                                         row,
                                         col,
-                                        // isStart,
-                                        // isFinish,
                                         isVisited,
                                         isWall,
                                         isPath,
