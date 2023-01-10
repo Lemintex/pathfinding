@@ -7,6 +7,7 @@ export default class Node extends Component {
             row,
             col,
             isStart,
+            isCheckpoint,
             isFinish,
             isWall,
             isVisited,
