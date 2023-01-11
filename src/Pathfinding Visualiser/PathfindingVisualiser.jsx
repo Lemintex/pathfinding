@@ -41,6 +41,7 @@ export default class PathfindingVisualiser extends Component {
                 row: 15,
                 col: 35,
             },
+            checkpointPosArray: [],
         };
     }
 
