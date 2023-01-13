@@ -22,6 +22,7 @@ const GRID_HEIGHT = 25;
 // const START_NODE_COL = 5;
 // const FINISH_NODE_ROW = 15;
 // const FINISH_NODE_COL = 35;
+
 let ANIMATION_SPEED = 20;
 
 export default class PathfindingVisualiser extends Component {
