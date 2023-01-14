@@ -132,15 +132,7 @@ export default class PathfindingVisualiser extends Component {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
         } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
-        }
-        // TODO: add functionality
-        switch (this.state.mousePressedMode) {
-            case MOUSE_MODE.WALL:
-                node.isWall = true;
-                break;
-
-            default:
-                break;
+            node.isWall = !node.isWall;
         }
         this.setState({ grid: newGrid });
     }
