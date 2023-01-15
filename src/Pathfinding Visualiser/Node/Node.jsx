@@ -30,7 +30,7 @@ export default class Node extends Component {
                 className={`node ${classInfo}`}
                 onMouseDown={() => onMouseDown(row, col)}
                 onMouseEnter={() => onMouseEnter(row, col)}
-                onMouseUp={() => onMouseUp()}
+                onMouseUp={() => onMouseUp(row, col)}
             ></div>
         );
     }

@@ -108,7 +108,7 @@ export default class PathfindingVisualiser extends Component {
                                                 this.handleMouseEnter(row, col)
                                             }
                                             onMouseUp={() =>
-                                                this.handleMouseUp()
+                                                this.handleMouseUp(row, col)
                                             }
                                         ></Node>
                                     );
@@ -128,8 +128,10 @@ export default class PathfindingVisualiser extends Component {
         let node = newGrid[row][col];
         if (node.isStart) {
             this.setState({ mousePressedMode: MOUSE_MODE.START });
+            node.isStart = false;
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
+            node.isFinish = false;
         } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
             node.isWall = !node.isWall;
@@ -139,6 +141,7 @@ export default class PathfindingVisualiser extends Component {
 
     handleMouseEnter(row, col) {
         if (!this.state.mousePressed) return;
+        console.log(this.state.mousePressed);
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
@@ -160,9 +163,29 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid: newGrid });
     }
 
-    handleMouseUp() {
+    handleMouseUp(row, col) {
+        // if (!this.state.mousePressed) return;
+        let newGrid = this.state.grid;
+        let node = newGrid[row][col];
+        switch (this.state.mousePressedMode) {
+            case MOUSE_MODE.START:
+                node.isStart = true;
+                break;
+
+            case MOUSE_MODE.FINISH:
+                node.isFinish = true;
+                break;
+
+            case MOUSE_MODE.WALL:
+                node.isWall = true;
+                break;
+
+            default:
+                break;
+        }
         this.setState({ mousePressed: false });
         this.setState({ mousePressedMode: -1 });
+        this.setState({ grid: newGrid });
     }
 
     generateEmptyGrid() {
