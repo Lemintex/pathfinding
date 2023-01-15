@@ -22,6 +22,7 @@ const GRID_HEIGHT = 25;
 // const START_NODE_COL = 5;
 // const FINISH_NODE_ROW = 15;
 // const FINISH_NODE_COL = 35;
+
 let ANIMATION_SPEED = 20;
 
 export default class PathfindingVisualiser extends Component {
@@ -41,6 +42,7 @@ export default class PathfindingVisualiser extends Component {
                 row: 15,
                 col: 35,
             },
+            checkpointPosArray: [],
         };
     }
 
@@ -77,8 +79,6 @@ export default class PathfindingVisualiser extends Component {
                                     let {
                                         row,
                                         col,
-                                        // isStart,
-                                        // isFinish,
                                         isVisited,
                                         isWall,
                                         isPath,
@@ -132,15 +132,7 @@ export default class PathfindingVisualiser extends Component {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
         } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
-        }
-        // TODO: add functionality
-        switch (this.state.mousePressedMode) {
-            case MOUSE_MODE.WALL:
-                node.isWall = true;
-                break;
-
-            default:
-                break;
+            node.isWall = !node.isWall;
         }
         this.setState({ grid: newGrid });
     }
