@@ -4,7 +4,7 @@ let nodesToBeVisited = [];
 export function weightedDijkstras(g, startNode) {
     grid = g;
     let visitedNodesInOrder = [];
-    nodesToBeVisited.push(startNode); // = getAllNodesFromGrid();
+    nodesToBeVisited.push(startNode);
     startNode.distance = 0;
     while (nodesToBeVisited.length > 0) {
         updateHeap();
