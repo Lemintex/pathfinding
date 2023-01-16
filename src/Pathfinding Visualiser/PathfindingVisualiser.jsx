@@ -14,6 +14,7 @@ const MOUSE_MODE = {
     START: 0,
     FINISH: 1,
     WALL: 2,
+    CHECKPOINT_ADD: 3,
 };
 
 const GRID_LENGTH = 39;
