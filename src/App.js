@@ -23,6 +23,8 @@ function App() {
         setReset(false);
     };
 
+    const [checkpoint, onCheckpoint] = useState(false);
+
     return (
         <>
             <div className='nav'>
