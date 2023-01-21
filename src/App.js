@@ -25,9 +25,13 @@ function App() {
 
     const [checkpoint, setCheckpoint] = useState(false);
 
-    const checkpointPlace = () => {};
+    const checkpointPlace = () => {
+        setCheckpoint(true);
+    };
 
-    const pnCheckpointPlace = () => {};
+    const onCheckpointPlace = () => {
+        setCheckpoint(false);
+    };
     return (
         <>
             <div className='nav'>
