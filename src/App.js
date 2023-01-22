@@ -32,6 +32,7 @@ function App() {
     const onCheckpointPlace = () => {
         setCheckpoint(false);
     };
+
     return (
         <>
             <div className='nav'>
