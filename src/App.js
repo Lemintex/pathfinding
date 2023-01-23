@@ -36,7 +36,11 @@ function App() {
     return (
         <>
             <div className='nav'>
-                <Nav algorithmStart={onStart} gridReset={onResetGrid}></Nav>
+                <Nav
+                    algorithmStart={onStart}
+                    gridReset={onResetGrid}
+                    checkpointPlace={checkpointPlace}
+                ></Nav>
             </div>
             <div className='main'>
                 <PathfindingVisualiser
