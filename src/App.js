@@ -29,7 +29,7 @@ function App() {
         setCheckpoint(true);
     };
 
-    const onCheckpointPlace = () => {
+    const checkpointPlaceReset = () => {
         setCheckpoint(false);
     };
 
@@ -49,6 +49,8 @@ function App() {
                     algorithmStartState={modeActivateReset}
                     resetGrid={reset}
                     resetGridState={gridReset}
+                    checkpointPlace={checkpoint}
+                    checkpointPlaceState={checkpointPlaceReset}
                 ></PathfindingVisualiser>
             </div>
         </>
