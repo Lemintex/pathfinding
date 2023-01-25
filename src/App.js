@@ -24,7 +24,6 @@ function App() {
     };
 
     const [checkpoint, setCheckpoint] = useState(false);
-
     const checkpointPlace = () => {
         setCheckpoint(true);
     };
