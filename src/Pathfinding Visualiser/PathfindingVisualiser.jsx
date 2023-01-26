@@ -66,6 +66,11 @@ export default class PathfindingVisualiser extends Component {
             this.generateEmptyGrid();
             this.props.resetGridState();
         }
+        if (
+            this.props.checkpointPlace &&
+            this.prevProps.checkpointPlace !== this.props.checkpointPlace
+        ) {
+        }
     }
 
     render() {
