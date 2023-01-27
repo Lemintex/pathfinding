@@ -70,6 +70,7 @@ export default class PathfindingVisualiser extends Component {
             this.props.checkpointPlace &&
             this.prevProps.checkpointPlace !== this.props.checkpointPlace
         ) {
+            //TODO: add checkpoint to list
         }
     }
 
