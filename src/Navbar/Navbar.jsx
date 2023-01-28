@@ -26,6 +26,11 @@ export default function Nav(props) {
                 onclick={beginAnimation}
                 text='Animate'
             ></ClickableButton>
+            <ClickableButton
+                id='place-checkpoint'
+                onclick={placeCheckpoint}
+                text='Checkpoint'
+            ></ClickableButton>
         </Navbar>
     );
 }

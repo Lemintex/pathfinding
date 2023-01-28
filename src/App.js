@@ -23,10 +23,23 @@ function App() {
         setReset(false);
     };
 
+    const [checkpoint, setCheckpoint] = useState(false);
+    const checkpointPlace = () => {
+        setCheckpoint(true);
+    };
+
+    const checkpointPlaceReset = () => {
+        setCheckpoint(false);
+    };
+
     return (
         <>
             <div className='nav'>
-                <Nav algorithmStart={onStart} gridReset={onResetGrid}></Nav>
+                <Nav
+                    algorithmStart={onStart}
+                    gridReset={onResetGrid}
+                    checkpointPlace={checkpointPlace}
+                ></Nav>
             </div>
             <div className='main'>
                 <PathfindingVisualiser
@@ -35,6 +48,8 @@ function App() {
                     algorithmStartState={modeActivateReset}
                     resetGrid={reset}
                     resetGridState={gridReset}
+                    checkpointPlace={checkpoint}
+                    checkpointPlaceState={checkpointPlaceReset}
                 ></PathfindingVisualiser>
             </div>
         </>

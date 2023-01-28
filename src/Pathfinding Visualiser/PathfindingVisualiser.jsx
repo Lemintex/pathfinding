@@ -14,6 +14,7 @@ const MOUSE_MODE = {
     START: 0,
     FINISH: 1,
     WALL: 2,
+    CHECKPOINT_ADD: 3,
 };
 
 const GRID_LENGTH = 39;
@@ -64,6 +65,12 @@ export default class PathfindingVisualiser extends Component {
         ) {
             this.generateEmptyGrid();
             this.props.resetGridState();
+        }
+        if (
+            this.props.checkpointPlace &&
+            this.prevProps.checkpointPlace !== this.props.checkpointPlace
+        ) {
+            //TODO: add checkpoint to list
         }
     }
 
