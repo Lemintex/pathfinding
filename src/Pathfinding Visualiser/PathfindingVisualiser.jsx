@@ -141,7 +141,6 @@ export default class PathfindingVisualiser extends Component {
 
     handleMouseEnter(row, col) {
         if (!this.state.mousePressed) return;
-        console.log(this.state.mousePressed);
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
@@ -164,7 +163,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     handleMouseUp(row, col) {
-        // if (!this.state.mousePressed) return;
+        if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
         let node = newGrid[row][col];
         switch (this.state.mousePressedMode) {
