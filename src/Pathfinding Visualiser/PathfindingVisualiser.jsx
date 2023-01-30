@@ -186,6 +186,11 @@ export default class PathfindingVisualiser extends Component {
                 node.isWall = true;
                 break;
 
+            case MOUSE_MODE.CHECKPOINT_ADD:
+                let checkpointPosArray = this.state.checkpointPosArray;
+                let checkpoint = { row: row, col: col };
+                checkpointPosArray.push(checkpoint);
+                this.setState({ checkpointPosArray: checkpointPosArray });
             default:
                 break;
         }
