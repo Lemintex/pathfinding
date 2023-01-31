@@ -21,6 +21,7 @@ export default class Node extends Component {
         else if (isFinish) classInfo = "node-finish";
         else if (isWall) classInfo = "node-wall";
         else if (isPath) classInfo = "node-path";
+        else if (isCheckpoint) classInfo = "node-checkpoint";
         else if (isVisited) classInfo = "node-visited";
         // else classInfo = `node-weight-${Math.floor(weight / 2)}`;
 
