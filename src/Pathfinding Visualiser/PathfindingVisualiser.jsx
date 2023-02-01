@@ -92,22 +92,33 @@ export default class PathfindingVisualiser extends Component {
                                         isPath,
                                         weight,
                                     } = node;
+
+                                    let isStart =
+                                        startPos.row === row &&
+                                        startPos.col === col;
+
+                                    let isFinish =
+                                        finishPos.row === row &&
+                                        finishPos.col === col;
+
+                                    let isCheckpoint = false;
+                                    for (c of this.state.checkpointPosArray) {
+                                        if (c.row === row && c.col === col) {
+                                            isCheckpoint = true;
+                                            break;
+                                        }
+                                    }
                                     return (
                                         <Node
                                             key={nodeIdx}
                                             row={row}
                                             col={col}
-                                            isStart={
-                                                startPos.row === row &&
-                                                startPos.col === col
-                                            }
-                                            isFinish={
-                                                finishPos.row === row &&
-                                                finishPos.col === col
-                                            }
+                                            isStart={isStart}
+                                            isFinish={isFinish}
                                             isVisited={isVisited}
                                             isWall={isWall}
                                             isPath={isPath}
+                                            isCheckpoint={isCheckpoint}
                                             weight={weight}
                                             onMouseDown={() =>
                                                 this.handleMouseDown(row, col)
