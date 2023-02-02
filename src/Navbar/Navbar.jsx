@@ -28,7 +28,7 @@ export default function Nav(props) {
             ></ClickableButton>
             <ClickableButton
                 id='place-checkpoint'
-                onclick={placeCheckpoint}
+                onclick={props.placeCheckpoint}
                 text='Checkpoint'
             ></ClickableButton>
         </Navbar>

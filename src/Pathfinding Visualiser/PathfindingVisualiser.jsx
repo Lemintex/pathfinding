@@ -102,7 +102,8 @@ export default class PathfindingVisualiser extends Component {
                                         finishPos.col === col;
 
                                     let isCheckpoint = false;
-                                    for (c of this.state.checkpointPosArray) {
+                                    for (let c of this.state
+                                        .checkpointPosArray) {
                                         if (c.row === row && c.col === col) {
                                             isCheckpoint = true;
                                             break;
