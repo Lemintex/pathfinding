@@ -109,6 +109,7 @@ export default class PathfindingVisualiser extends Component {
                                             break;
                                         }
                                     }
+
                                     return (
                                         <Node
                                             key={nodeIdx}
