@@ -11,6 +11,10 @@
     background-color: green;
 }
 
+.node-checkpoint {
+    background-color: aqua;
+}
+
 .node-finish {
     background-color: red;
 }
