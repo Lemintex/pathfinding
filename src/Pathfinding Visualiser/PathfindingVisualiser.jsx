@@ -68,9 +68,12 @@ export default class PathfindingVisualiser extends Component {
         }
         if (
             this.props.checkpointPlace &&
-            this.prevProps.checkpointPlace !== this.props.checkpointPlace
+            prevProps.checkpointPlace !== this.props.checkpointPlace
         ) {
-            this.setState({ mousePressedMode: MOUSE_MODE.CHECKPOINT_ADD });
+            this.setState({
+                mousePressedMode: MOUSE_MODE.CHECKPOINT_ADD,
+                mousePressed: true,
+            });
             this.props.checkpointPlaceState();
         }
     }
@@ -177,6 +180,11 @@ export default class PathfindingVisualiser extends Component {
                 node.isWall = true;
                 break;
 
+            case MOUSE_MODE.CHECKPOINT_ADD:
+                let checkpoints = this.state.checkpointPosArray;
+                checkpoints.pop();
+                checkpoints.push({ row: row, col: col });
+                this.setState({ checkpointPosArray: checkpoints });
             default:
                 break;
         }
