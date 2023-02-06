@@ -156,7 +156,7 @@ export default class PathfindingVisualiser extends Component {
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
             node.isFinish = false;
-        } else {
+        } else if (!node.isCheckpoint) {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
             node.isWall = !node.isWall;
         }
@@ -182,9 +182,12 @@ export default class PathfindingVisualiser extends Component {
 
             case MOUSE_MODE.CHECKPOINT_ADD:
                 let checkpoints = this.state.checkpointPosArray;
-                checkpoints.pop();
+                if (checkpoints.length > 0) checkpoints.pop();
                 checkpoints.push({ row: row, col: col });
-                this.setState({ checkpointPosArray: checkpoints });
+                this.setState({
+                    checkpointPosArray: checkpoints,
+                    // mousePressedMode: -1,
+                });
             default:
                 break;
         }
@@ -209,10 +212,14 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case MOUSE_MODE.CHECKPOINT_ADD:
+                node.isCheckpoint = true;
                 let checkpointPosArray = this.state.checkpointPosArray;
                 let checkpoint = { row: row, col: col };
                 checkpointPosArray.push(checkpoint);
-                this.setState({ checkpointPosArray: checkpointPosArray });
+                this.setState({
+                    checkpointPosArray: checkpointPosArray,
+                    mousePressedMode: -1,
+                });
             default:
                 break;
         }
