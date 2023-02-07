@@ -19,10 +19,10 @@ export default class Node extends Component {
         let classInfo = "";
         if (isStart) classInfo = "node-start";
         else if (isFinish) classInfo = "node-finish";
-        else if (isWall) classInfo = "node-wall";
         else if (isPath) classInfo = "node-path";
         else if (isCheckpoint) classInfo = "node-checkpoint";
         else if (isVisited) classInfo = "node-visited";
+        else if (isWall) classInfo = "node-wall";
         // else classInfo = `node-weight-${Math.floor(weight / 2)}`;
 
         return (

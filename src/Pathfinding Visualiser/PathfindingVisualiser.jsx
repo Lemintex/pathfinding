@@ -156,7 +156,9 @@ export default class PathfindingVisualiser extends Component {
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
             node.isFinish = false;
-        } else if (!node.isCheckpoint) {
+        } else if (node.isCheckpoint) {
+            //checkpoint stuff here
+        } else if (node.isWall) {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
             node.isWall = !node.isWall;
         }
@@ -186,7 +188,6 @@ export default class PathfindingVisualiser extends Component {
                 checkpoints.push({ row: row, col: col });
                 this.setState({
                     checkpointPosArray: checkpoints,
-                    // mousePressedMode: -1,
                 });
             default:
                 break;
