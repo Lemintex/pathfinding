@@ -158,7 +158,7 @@ export default class PathfindingVisualiser extends Component {
             node.isFinish = false;
         } else if (node.isCheckpoint) {
             //checkpoint stuff here
-        } else if (node.isWall) {
+        } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
             node.isWall = !node.isWall;
         }
