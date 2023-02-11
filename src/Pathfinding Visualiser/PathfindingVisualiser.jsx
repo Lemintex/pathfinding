@@ -215,10 +215,7 @@ export default class PathfindingVisualiser extends Component {
                 let checkpointPosArray = this.state.checkpointPosArray;
                 let checkpoint = { row: row, col: col };
                 checkpointPosArray.push(checkpoint);
-                this.setState({
-                    checkpointPosArray: checkpointPosArray,
-                    mousePressedMode: -1,
-                });
+                this.setState({ checkpointPosArray: checkpointPosArray });
             default:
                 break;
         }
