@@ -250,6 +250,8 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid });
     }
 
+    removeCheckpoint() {}
+
     activateSelectedAlgorithm() {
         switch (this.props.algorithm) {
             case "DepthFirstSearch":
