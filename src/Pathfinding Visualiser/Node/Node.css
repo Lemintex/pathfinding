@@ -35,19 +35,15 @@
 }
 
 .node-weight-0 {
-    outline: 1px solid black;
     background-color: rgb(240);
 }
 .node-weight-1 {
-    outline: 1px solid black;
     background-color: rgb(250, 200, 200);
 }
 .node-weight-2 {
-    outline: 1px solid black;
     background-color: rgb(250, 150, 150);
 }
 .node-weight-3 {
-    outline: 1px solid black;
     background-color: rgb(250, 50, 50);
 }
 
