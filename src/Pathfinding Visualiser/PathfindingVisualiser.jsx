@@ -250,7 +250,17 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid });
     }
 
-    removeCheckpoint() {}
+    removeCheckpoint(row, col) {
+        let checkpoints = this.state.checkpointPosArray;
+        for (let i = 0; i < checkpoints.length; i++) {
+            let c = checkpoints[i];
+            if (c.row === row && c.col === col) {
+                checkpoints.splice(i, 1);
+                this.setState({ checkpointPosArray: checkpoints });
+                return;
+            }
+        }
+    }
 
     activateSelectedAlgorithm() {
         switch (this.props.algorithm) {
