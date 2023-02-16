@@ -70,7 +70,10 @@ export default class PathfindingVisualiser extends Component {
             this.props.checkpointPlace &&
             prevProps.checkpointPlace !== this.props.checkpointPlace
         ) {
+            let checkpoint = this.state.checkpointPosArray;
+            checkpoint.push({ row: -1, col: -1 });
             this.setState({
+                checkpointPosArray: checkpoint,
                 mousePressedMode: MOUSE_MODE.CHECKPOINT_ADD,
                 mousePressed: true,
             });
@@ -184,10 +187,7 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case MOUSE_MODE.CHECKPOINT_ADD:
-                let checkpoints = this.state.checkpointPosArray;
-                if (checkpoints.length > 0) checkpoints.pop();
-                checkpoints.push({ row: row, col: col });
-                this.setState({ checkpointPosArray: checkpoints });
+                this.addCheckpoint(row, col);
             default:
                 break;
         }
@@ -212,11 +212,8 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case MOUSE_MODE.CHECKPOINT_ADD:
-                node.isCheckpoint = true;
-                let checkpointPosArray = this.state.checkpointPosArray;
-                let checkpoint = { row: row, col: col };
-                checkpointPosArray.push(checkpoint);
-                this.setState({ checkpointPosArray: checkpointPosArray });
+                this.removeCheckpoint();
+                break;
             default:
                 break;
         }
@@ -248,6 +245,18 @@ export default class PathfindingVisualiser extends Component {
             grid.push(currentRow);
         }
         this.setState({ grid });
+    }
+
+    addCheckpoint(row, col) {
+        let checkpoint = this.state.checkpointPosArray;
+        // checkpoint.pop();
+        for (let c of checkpoint) {
+            if (c.row === row && c.col === col) {
+                return;
+            }
+        }
+        checkpoint.push({ row: row, col: col });
+        this.setState({ checkpointPosArray: checkpoint });
     }
 
     removeCheckpoint(row, col) {
