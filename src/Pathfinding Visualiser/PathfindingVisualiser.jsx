@@ -257,7 +257,6 @@ export default class PathfindingVisualiser extends Component {
     }
 
     removeCheckpoint(row, col) {
-        console.log("looking");
         let checkpoints = this.state.checkpointPosArray;
         for (let i = 0; i < checkpoints.length - 1; i++) {
             let c = checkpoints[i];
