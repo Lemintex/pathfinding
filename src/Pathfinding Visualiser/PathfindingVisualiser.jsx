@@ -159,14 +159,13 @@ export default class PathfindingVisualiser extends Component {
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
             node.isFinish = false;
-        } else if (node.isCheckpoint) {
+        } else if ((this.state.mousePressedMode = MOUSE_MODE.addCheckpoint)) {
             //TODO: remove checkpoints
             //checkpoint stuff here
+        } else {
+            this.setState({ mousePressedMode: MOUSE_MODE.WALL });
+            node.isWall = !node.isWall;
         }
-        // else {
-        //     this.setState({ mousePressedMode: MOUSE_MODE.WALL });
-        //     node.isWall = !node.isWall;
-        // }
         this.setState({ grid: newGrid });
     }
 
@@ -210,7 +209,7 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case MOUSE_MODE.WALL:
-                node.isWall = true;
+                // node.isWall = true;
                 break;
 
             case MOUSE_MODE.CHECKPOINT_ADD:
