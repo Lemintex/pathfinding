@@ -209,7 +209,7 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case MOUSE_MODE.WALL:
-                // node.isWall = true;
+                // WALL STUFF
                 break;
 
             case MOUSE_MODE.CHECKPOINT_ADD:
