@@ -237,6 +237,7 @@ export default class PathfindingVisualiser extends Component {
                     isWall: false,
                     isVisited: false,
                     isPath: false,
+                    isCheckpoint: false,
                     previousNode: null,
                     distance: Infinity,
                     weight: 0,
