@@ -246,7 +246,7 @@ export default class PathfindingVisualiser extends Component {
             }
             grid.push(currentRow);
         }
-        this.setState({ grid });
+        this.setState({ grid: grid, checkpointPosArray: [] });
     }
 
     addCheckpoint(row, col) {
