@@ -236,6 +236,7 @@ export default class PathfindingVisualiser extends Component {
                     isWall: false,
                     isVisited: false,
                     isPath: false,
+                    isCheckpoint: false,
                     previousNode: null,
                     distance: Infinity,
                     weight: 0,
@@ -244,7 +245,7 @@ export default class PathfindingVisualiser extends Component {
             }
             grid.push(currentRow);
         }
-        this.setState({ grid });
+        this.setState({ grid: grid, checkpointPosArray: [] });
     }
 
     addCheckpoint(row, col) {
