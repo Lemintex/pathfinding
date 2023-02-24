@@ -31,7 +31,7 @@
 .node-path {
     animation-name: final-path;
     animation-fill-mode: forwards;
-    animation-duration: 0.25s;
+    animation-duration: 0.2s;
 }
 
 .node-weight-0 {
