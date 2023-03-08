@@ -159,7 +159,7 @@ export default class PathfindingVisualiser extends Component {
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
             node.isFinish = false;
-        } else if ((this.state.mousePressedMode = MOUSE_MODE.addCheckpoint)) {
+        } else if ((this.state.mousePressedMode = MOUSE_MODE.CHECKPOINT_ADD)) {
             //checkpoint stuff here
         } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
