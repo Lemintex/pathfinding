@@ -193,6 +193,7 @@ export default class PathfindingVisualiser extends Component {
         this.setState({ grid: newGrid });
     }
 
+    //TODO: consider removing
     handleMouseUp(row, col) {
         if (!this.state.mousePressed) return;
         let newGrid = this.state.grid;
