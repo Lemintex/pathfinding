@@ -4,8 +4,8 @@ let grid;
 export function unweightedAStar(g, startNode, finishNode) {
     grid = g;
     let visitedNodesInOrder = [];
-    nodesToBeVisited = []; //getAllNodesFromGrid();
     startNode.distance = 0;
+    nodesToBeVisited.push(startNode);
     while (nodesToBeVisited.length > 0) {
         updateHeap();
         let nextNode = nodesToBeVisited.shift();
