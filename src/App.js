@@ -24,13 +24,22 @@ function App() {
         setReset(false);
     };
 
-    const [checkpoint, setCheckpoint] = useState(false);
-    const checkpointPlace = () => {
-        setCheckpoint(true);
+    // const [checkpoint, setCheckpoint] = useState(false);
+    // const checkpointPlace = () => {
+    //     setCheckpoint(true);
+    // };
+
+    // const checkpointPlaceReset = () => {
+    //     setCheckpoint(false);
+    // };
+
+    const [wall, setWall] = useState(false);
+    const wallPlace = () => {
+        setWall(true);
     };
 
-    const checkpointPlaceReset = () => {
-        setCheckpoint(false);
+    const wallPlaceReset = () => {
+        setWall(false);
     };
 
     return (
@@ -39,7 +48,8 @@ function App() {
                 <Nav
                     algorithmStart={onStart}
                     gridReset={onResetGrid}
-                    checkpointPlace={checkpointPlace}
+                    // checkpointPlace={checkpointPlace}
+                    wallPlace={wallPlace}
                 ></Nav>
             </div>
             <div className='main'>
@@ -49,8 +59,8 @@ function App() {
                     algorithmStartState={modeActivateReset}
                     resetGrid={reset}
                     resetGridState={gridReset}
-                    checkpointPlace={checkpoint}
-                    checkpointPlaceState={checkpointPlaceReset}
+                    // checkpointPlace={checkpoint}
+                    // checkpointPlaceState={checkpointPlaceReset}
                 ></PathfindingVisualiser>
             </div>
         </>

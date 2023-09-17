@@ -32,7 +32,7 @@ export default class PathfindingVisualiser extends Component {
         this.state = {
             grid: [],
             mousePressed: false,
-            mousePressedMode: -1,
+            mousePressedMode: MOUSE_MODE.WALL,
             algorithmInProgress: false,
             selectedNodeIndex: [],
             startPos: {
@@ -43,7 +43,7 @@ export default class PathfindingVisualiser extends Component {
                 row: 15,
                 col: 35,
             },
-            checkpointPosArray: [],
+            // checkpointPosArray: [],
         };
     }
 
@@ -55,6 +55,7 @@ export default class PathfindingVisualiser extends Component {
         if (
             this.props.algorithmStart &&
             prevProps.algorithmStart !== this.props.algorithmStart
+            // !this.state.algorithmInProgress
         ) {
             this.activateSelectedAlgorithm();
             this.props.algorithmStartState();
@@ -66,19 +67,19 @@ export default class PathfindingVisualiser extends Component {
             this.generateEmptyGrid();
             this.props.resetGridState();
         }
-        if (
-            this.props.checkpointPlace &&
-            prevProps.checkpointPlace !== this.props.checkpointPlace
-        ) {
-            let checkpoint = this.state.checkpointPosArray;
-            checkpoint.push({ row: -1, col: -1 });
-            this.setState({
-                checkpointPosArray: checkpoint,
-                mousePressedMode: MOUSE_MODE.CHECKPOINT_ADD,
-                mousePressed: true,
-            });
-            this.props.checkpointPlaceState();
-        }
+        // if (
+        //     this.props.checkpointPlace &&
+        //     prevProps.checkpointPlace !== this.props.checkpointPlace
+        // ) {
+        //     let checkpoint = this.state.checkpointPosArray;
+        //     checkpoint.push({ row: -1, col: -1 });
+        //     this.setState({
+        //         checkpointPosArray: checkpoint,
+        //         mousePressedMode: MOUSE_MODE.CHECKPOINT_ADD,
+        //         mousePressed: true,
+        //     });
+        //     this.props.checkpointPlaceState();
+        // }
     }
 
     render() {
@@ -108,13 +109,13 @@ export default class PathfindingVisualiser extends Component {
                                         finishPos.col === col;
 
                                     let isCheckpoint = false;
-                                    for (let c of this.state
-                                        .checkpointPosArray) {
-                                        if (c.row === row && c.col === col) {
-                                            isCheckpoint = true;
-                                            break;
-                                        }
-                                    }
+                                    // for (let c of this.state
+                                    //     .checkpointPosArray) {
+                                    //     if (c.row === row && c.col === col) {
+                                    //         isCheckpoint = true;
+                                    //         break;
+                                    //     }
+                                    // }
 
                                     return (
                                         <Node
@@ -149,6 +150,7 @@ export default class PathfindingVisualiser extends Component {
     }
 
     handleMouseDown(row, col) {
+        console.log(this.state);
         this.setState({ mousePressed: true });
         if (this.state.algorithmInProgress) return;
         let newGrid = this.state.grid;
@@ -159,11 +161,12 @@ export default class PathfindingVisualiser extends Component {
         } else if (node.isFinish) {
             this.setState({ mousePressedMode: MOUSE_MODE.FINISH });
             node.isFinish = false;
-        } else if ((this.state.mousePressedMode = MOUSE_MODE.CHECKPOINT_ADD)) {
+        } else if (this.state.mousePressedMode == MOUSE_MODE.CHECKPOINT_ADD) {
             //checkpoint stuff here
         } else {
             this.setState({ mousePressedMode: MOUSE_MODE.WALL });
             node.isWall = !node.isWall;
+            console.log(node);
         }
         this.setState({ grid: newGrid });
     }
@@ -185,8 +188,8 @@ export default class PathfindingVisualiser extends Component {
                 node.isWall = true;
                 break;
 
-            case MOUSE_MODE.CHECKPOINT_ADD:
-                this.addCheckpoint(row, col);
+            // case MOUSE_MODE.CHECKPOINT_ADD:
+            //     this.addCheckpoint(row, col);
             default:
                 break;
         }
@@ -212,14 +215,14 @@ export default class PathfindingVisualiser extends Component {
                 // WALL STUFF
                 break;
 
-            case MOUSE_MODE.CHECKPOINT_ADD:
-                this.removeCheckpoint(row, col);
-                break;
+            // case MOUSE_MODE.CHECKPOINT_ADD:
+            //     this.removeCheckpoint(row, col);
+            //     break;
             default:
                 break;
         }
         this.setState({ mousePressed: false });
-        this.setState({ mousePressedMode: -1 });
+        this.setState({ mousePressedMode: MOUSE_MODE.WALL });
         this.setState({ grid: newGrid });
     }
 
@@ -246,28 +249,28 @@ export default class PathfindingVisualiser extends Component {
             }
             grid.push(currentRow);
         }
-        this.setState({ grid: grid, checkpointPosArray: [] });
+        this.setState({ grid: grid });
     }
 
-    addCheckpoint(row, col) {
-        let checkpoint = this.state.checkpointPosArray;
-        checkpoint.pop();
-        checkpoint.push({ row: row, col: col });
-        this.setState({ checkpointPosArray: checkpoint });
-    }
+    // addCheckpoint(row, col) {
+    //     let checkpoint = this.state.checkpointPosArray;
+    //     checkpoint.pop();
+    //     checkpoint.push({ row: row, col: col });
+    //     this.setState({ checkpointPosArray: checkpoint });
+    // }
 
-    removeCheckpoint(row, col) {
-        let checkpoints = this.state.checkpointPosArray;
-        for (let i = 0; i < checkpoints.length - 1; i++) {
-            let c = checkpoints[i];
-            if (c.row === row && c.col === col) {
-                checkpoints.pop();
-                checkpoints.splice(i, 1);
-                this.setState({ checkpointPosArray: checkpoints });
-                return;
-            }
-        }
-    }
+    // removeCheckpoint(row, col) {
+    //     let checkpoints = this.state.checkpointPosArray;
+    //     for (let i = 0; i < checkpoints.length - 1; i++) {
+    //         let c = checkpoints[i];
+    //         if (c.row === row && c.col === col) {
+    //             checkpoints.pop();
+    //             checkpoints.splice(i, 1);
+    //             this.setState({ checkpointPosArray: checkpoints });
+    //             return;
+    //         }
+    //     }
+    // }
 
     activateSelectedAlgorithm() {
         switch (this.props.algorithm) {
@@ -302,6 +305,7 @@ export default class PathfindingVisualiser extends Component {
             default:
                 break;
         }
+        this.setState({ algorithmInProgress: true });
     }
 
     getPathFound() {
@@ -381,6 +385,7 @@ export default class PathfindingVisualiser extends Component {
                 this.setState({ grid });
             }, ANIMATION_SPEED * i);
         }
+        this.setState({ algorithmInProgress: false });
     }
 
     generateNodeWeights() {

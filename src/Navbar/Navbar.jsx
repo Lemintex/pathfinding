@@ -27,10 +27,14 @@ export default function Nav(props) {
                 text='Animate'
             ></ClickableButton>
             <ClickableButton
+                onclick={props.wallPlace}
+                text='Wall'
+            ></ClickableButton>
+            {/* <ClickableButton
                 id='place-checkpoint'
                 onclick={props.checkpointPlace}
                 text='Checkpoint'
-            ></ClickableButton>
+            ></ClickableButton> */}
         </Navbar>
     );
 }

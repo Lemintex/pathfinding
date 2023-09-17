@@ -2,7 +2,7 @@ let grid;
 let nodesToBeVisited = [];
 
 // begins BFS
-export function beginBreadthFirstSearch(g, startNode, checkpoints = []) {
+export function beginBreadthFirstSearch(g, startNode /*, checkpoints = []*/) {
     grid = g;
     let nodesInVisitedOrder = [];
     startNode.hasBeenVisited = true;
