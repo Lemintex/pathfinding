@@ -295,6 +295,7 @@ export default class PathfindingVisualiser extends Component {
                 break;
 
             case "RecursiveMaze":
+                this.generateEmptyGrid();
                 this.generateRecursiveMaze();
                 break;
 
