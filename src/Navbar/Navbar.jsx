@@ -30,11 +30,6 @@ export default function Nav(props) {
                 onclick={props.wallPlace}
                 text='Wall'
             ></ClickableButton>
-            {/* <ClickableButton
-                id='place-checkpoint'
-                onclick={props.checkpointPlace}
-                text='Checkpoint'
-            ></ClickableButton> */}
         </Navbar>
     );
 }
