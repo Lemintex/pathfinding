@@ -13,6 +13,7 @@ export function generateRecursionMaze(g) {
     return listsOfNodesToMakeWalls;
 }
 
+// creates bounds of maze
 function createBounds() {
     let horizontal = [];
     let vertical = [];
